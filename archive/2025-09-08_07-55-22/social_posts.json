@@ -1,0 +1,41 @@
+[
+  {
+    "platform": "facebook",
+    "text_content": "Is the future of food written in the air? 🌬️ Our latest deep dive explores the fascinating world of air-based protein, from Solar Foods' groundbreaking factory in Finland to the potential for a truly sustainable food source. We examine scalability, environmental impact, and consumer acceptance. Could this be the key to feeding a growing population? 🤔 Read the full article and join the conversation: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "instagram",
+    "text_content": "Imagine eating food made from thin air! 🤯 Our new article dives into the science, the potential, and the challenges of air-based protein. Will it revolutionize our food system? Find out! Link in bio. #veganbiotech #futureoffood #sustainablefood #airprotein #solein #foodtech\n\nAlso, don't miss the news about Perfect Day partnering with Nestle for vegan chocolate milk and Ananas Anam collaborating with H&M for sustainable fashion!",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": "A futuristic, brightly lit indoor vertical farm with gleaming metal fermentation tanks. Sunlight streams in, illuminating lush green plants growing alongside the tanks. The focus is on a single fermentation tank with a window showing bubbling, golden-colored liquid. A scientist in a clean white lab coat smiles and gestures towards the tank. In the background, sleek, modern architecture can be seen.",
+    "reddit_details": null
+  },
+  {
+    "platform": "bluesky",
+    "text_content": "Air-based protein: food from thin air?! 🤯 Our latest article explores whether this is a viable future food source. What do you think? Could you see yourself eating air protein? Let's discuss! 👇 {{GHOST_ARTICLE_URL}} #futureoffood #veganbiotech",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "mastodon",
+    "text_content": "New on the Vegan BioTech Report: A deep dive into air-based protein! We explore the science, scalability, environmental impact, and potential consumer acceptance of this novel food source. Is this the future of food? 🤔 Read the full article here: {{GHOST_ARTICLE_URL}} #veganbiotech #futureoffood #sustainablefood #airprotein #solein #foodtech",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "reddit",
+    "text_content": "Hey everyone! I just read this mind-blowing article about air-based protein - seriously, food made from *air*! It talks about how companies like Solar Foods are actually making this happen, the potential environmental benefits, and whether people will actually be willing to eat it. It really made me think about the future of food and how we can feed a growing population sustainably. What are your thoughts on this? Would you try air-based protein? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": {
+      "suggested_subreddit": "r/science",
+      "post_title": "Air-Based Protein: Is This the Future of Food?",
+      "primary_topic_keyword": "Biotech"
+    }
+  }
+]

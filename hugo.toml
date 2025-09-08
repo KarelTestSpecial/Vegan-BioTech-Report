@@ -7,7 +7,7 @@ defaultContentLanguage = "en"
   pagerSize = 20
   
 [params]
-  mainSections = ["posts"]
+  mainSections = ["posts", "longreads", "newsletters"]
   
 [outputs]
   home = ["HTML", "RSS"]
@@ -26,3 +26,13 @@ defaultContentLanguage = "en"
   name = "About"
   url = "/about/"
   weight = 2
+
+[[menu.main]]
+  name = "Longreads"
+  url = "/longreads/"
+  weight = 3
+
+[[menu.main]]
+  name = "Newsletters"
+  url = "/newsletters/"
+  weight = 4

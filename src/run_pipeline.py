@@ -199,6 +199,7 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
 
     run_task_with_fallback("Generate Long-Read Outline", task_select_and_generate_outline, providers_to_run)
 
+
     # Stap 5: Genereer de longread voor elke actieve taal
     eprint("\n--- Stap 5: Generate Long-Read Articles ---")
     for lang_config in enabled_langs:

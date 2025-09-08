@@ -90,7 +90,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - name: Build with Hugo
-        run: hugo --cleanDestinationDir --minify --baseURL ${{ steps.pages.outputs.base_url }}
+        run: hugo --buildFuture --cleanDestinationDir --minify --baseURL ${{ steps.pages.outputs.base_url }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

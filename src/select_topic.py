@@ -1,5 +1,5 @@
 # src/select_topic.py
-import os, glob, argparse, sys
+import os, glob, argparse, sys, json
 import google.generativeai as genai
 from openai import OpenAI
 
@@ -15,7 +15,7 @@ def get_latest_newsletter_file(content_dir="content"):
         raise FileNotFoundError(f"Geen Engelse nieuwsbrief (*_en.md) gevonden in '{os.path.join(content_dir, 'posts')}'.")
     return max(list_of_files, key=os.path.getctime)
 
-def select_best_topic(newsletter_content: str) -> str:
+def select_best_topic(newsletter_content: str, previous_topics: list) -> str:
     API_TYPE = os.getenv('AI_API_TYPE')
     MODEL_ID = os.getenv('AI_MODEL_ID')
     API_KEY = os.getenv('AI_API_KEY')
@@ -46,14 +46,20 @@ def select_best_topic(newsletter_content: str) -> str:
     else:
         raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}.")
 
+    previous_topics_list = "\n".join(f"- {topic}" for topic in previous_topics)
     prompt = f"""
     You are a senior content strategist for the "Vegan BioTech Report".
     Your task is to analyze the following weekly newsletter and identify the single most compelling topic for a deep-dive, long-read article (1500-2500 words).
     The ideal topic should have significant long-term impact, be based on a concrete news item, and be broad enough for a deep analysis.
+
     Analyze the newsletter content below:
     ---
     {newsletter_content}
     ---
+
+    **VERY IMPORTANT**: Avoid selecting a topic that is too similar to the following recently used topics:
+    {previous_topics_list}
+
     Based on your analysis, formulate a single, descriptive sentence that can be used as a direct input prompt for another AI writer.
     **CRITICAL:** Your ENTIRE output must be ONLY this single sentence. Do not add any commentary, headings, or quotation marks.
     """
@@ -66,13 +72,23 @@ def select_best_topic(newsletter_content: str) -> str:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Selecteert het beste long-read onderwerp uit de laatste nieuwsbrief.")
     parser.add_argument("--content_dir", type=str, default="content", help="De map waar de nieuwsbriefbestanden staan.")
+    parser.add_argument("--previous_topics_file", type=str, default="last_topics.json", help="JSON-bestand met een lijst van eerder gebruikte onderwerpen.")
     args = parser.parse_args()
+
+    previous_topics = []
+    try:
+        with open(args.previous_topics_file, 'r', encoding='utf-8') as f:
+            previous_topics = json.load(f)
+        eprint(f"Eerder gebruikte onderwerpen geladen uit {args.previous_topics_file}")
+    except (FileNotFoundError, json.JSONDecodeError):
+        eprint(f"Waarschuwing: Kon {args.previous_topics_file} niet laden. Ga verder met een lege lijst.")
+
     try:
         latest_newsletter = get_latest_newsletter_file(args.content_dir)
         eprint(f"Meest recente nieuwsbrief gevonden: {latest_newsletter}")
         with open(latest_newsletter, 'r', encoding='utf-8') as f:
             content = f.read()
-        topic = select_best_topic(content)
+        topic = select_best_topic(content, previous_topics)
         print(topic)
     except Exception as e:
         eprint(f"❌ Fout: {e}")

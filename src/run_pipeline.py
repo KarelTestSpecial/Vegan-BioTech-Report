@@ -156,12 +156,42 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     # Stap 4: Genereer de Engelse outline (één keer)
     if not os.path.exists("longread_outline.json"):
         def task_select_and_generate_outline(provider_config):
-            env = build_script_env(provider_config)
+            env = build_script_env(provider_config, run_content_dir)
             # Stap 4a: Selecteer onderwerp
+            # De aanroep naar select_topic zal nu automatisch last_topics.json lezen.
             topic_process = run_command(["python3", "-m", "src.select_topic"], env=env)
             longread_topic = topic_process.stdout.strip()
-            # Stap 4b: Genereer alleen de outline
-            run_command(["python3", "-m", "src.generate_longread_outline", longread_topic, "--outline-out", "longread_outline.json"], env=env)
+
+            # Stap 4b: Genereer de outline
+            outline_path = "longread_outline.json"
+            run_command(["python3", "-m", "src.generate_longread_outline", longread_topic, "--outline-out", outline_path], env=env)
+
+            # Stap 4c: Update de lijst met vorige onderwerpen
+            try:
+                with open(outline_path, 'r', encoding='utf-8') as f:
+                    new_outline = json.load(f)
+                new_topic_title = new_outline.get('title')
+
+                if new_topic_title:
+                    topics_file = "last_topics.json"
+                    previous_topics = []
+                    try:
+                        with open(topics_file, 'r', encoding='utf-8') as f:
+                            previous_topics = json.load(f)
+                    except (FileNotFoundError, json.JSONDecodeError):
+                        pass # Het is oké als het bestand niet bestaat, we maken het aan.
+
+                    previous_topics.append(new_topic_title)
+                    # Bewaar alleen de laatste 2 onderwerpen
+                    previous_topics = previous_topics[-2:]
+
+                    with open(topics_file, 'w', encoding='utf-8') as f:
+                        json.dump(previous_topics, f, indent=2)
+                    eprint(f"✅ Onderwerpgeschiedenis bijgewerkt in {topics_file}")
+
+            except Exception as e:
+                eprint(f"⚠️ Kon de onderwerpgeschiedenis niet bijwerken: {e}")
+
         run_task_with_fallback("Generate Long-Read Outline", task_select_and_generate_outline, providers_to_run)
     else:
         eprint("INFO: Stap 4 (Outline) overgeslagen, bestand bestaat al.")

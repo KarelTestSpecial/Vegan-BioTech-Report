@@ -30,10 +30,21 @@ def run_command(command: list, env: dict):
     return process
 
 def archive_old_content():
-    """Archiveert oude content en data bestanden naar een timestamped map."""
-    content_files = glob.glob("content/posts/*.md")
+    """Archiveert oude content-directories en data-bestanden naar een timestamped map."""
+    content_dirs_to_check = ["content/newsletters", "content/longreads", "content/posts"]
+
+    # Zoek naar alle timestamped subdirectories (YYYY-MM-DD_HH-MM-SS)
+    old_content_dirs = []
+    for base_dir in content_dirs_to_check:
+        if os.path.exists(base_dir):
+            # Glob op '*/' om alleen directories te vinden
+            pattern = os.path.join(base_dir, "20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]_*")
+            found_dirs = glob.glob(pattern)
+            old_content_dirs.extend(found_dirs)
+
     data_files = ["raw.json", "curated.json", "social_posts.json", "longread_outline.json", "published_post_url.txt"]
-    if not content_files and not any(os.path.exists(f) for f in data_files):
+
+    if not old_content_dirs and not any(os.path.exists(f) for f in data_files):
         eprint("Geen bestaande content gevonden om te archiveren.")
         return
     
@@ -43,12 +54,18 @@ def archive_old_content():
     run_archive_dir = os.path.join(archive_dir, timestamp)
     os.makedirs(run_archive_dir)
     
-    if content_files:
-        posts_archive_dir = os.path.join(run_archive_dir, "content", "posts")
-        os.makedirs(posts_archive_dir, exist_ok=True)
-        for file_path in content_files:
-            shutil.move(file_path, os.path.join(posts_archive_dir, os.path.basename(file_path)))
-    
+    # Archiveer de gevonden content directories
+    if old_content_dirs:
+        content_archive_base = os.path.join(run_archive_dir, "content")
+        os.makedirs(content_archive_base, exist_ok=True)
+        for dir_path in old_content_dirs:
+            # Bepaal de bestemming (bv. archive/ts/content/newsletters/ts_sub)
+            parent_dir_name = os.path.basename(os.path.dirname(dir_path))
+            dest_parent_dir = os.path.join(content_archive_base, parent_dir_name)
+            os.makedirs(dest_parent_dir, exist_ok=True)
+            shutil.move(dir_path, dest_parent_dir)
+
+    # Archiveer de hoofdniveau data bestanden
     for file_path in data_files:
         if os.path.exists(file_path):
             shutil.move(file_path, run_archive_dir)
@@ -79,8 +96,8 @@ def build_script_env(provider_config: dict, content_dir: str) -> dict:
     script_env['AI_API_KEY'] = os.getenv(provider_config['api_key_name'])
     if provider_config.get('base_url'):
         script_env['AI_BASE_URL'] = provider_config['base_url']
-    # Voeg de unieke content directory toe aan de environment
-    script_env['VBR_CONTENT_DIR'] = content_dir
+    if content_dir:
+        script_env['VBR_CONTENT_DIR'] = content_dir
     return script_env
 
 def run_task_with_fallback(task_name: str, task_function, providers_to_run):
@@ -144,26 +161,31 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         sys.exit(1)
 
     run_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    run_content_dir = os.path.join("content", "posts", run_timestamp)
-    os.makedirs(run_content_dir, exist_ok=True)
-    eprint(f"Content voor deze run wordt opgeslagen in: {run_content_dir}")
+
+    # Maak aparte directories voor nieuwsbrieven en longreads
+    newsletter_content_dir = os.path.join("content", "newsletters", run_timestamp)
+    longread_content_dir = os.path.join("content", "longreads", run_timestamp)
+    os.makedirs(newsletter_content_dir, exist_ok=True)
+    os.makedirs(longread_content_dir, exist_ok=True)
+    eprint(f"Nieuwsbrieven voor deze run worden opgeslagen in: {newsletter_content_dir}")
+    eprint(f"Longreads voor deze run worden opgeslagen in: {longread_content_dir}")
 
     enabled_langs = [lang for lang in json.load(open('languages.json')) if lang.get('enabled')]
 
     # Stap 1-3: Fetch, Curate, Draft (draaien nu altijd)
     eprint("\n--- Stap 1: Fetch Data ---")
-    run_task_with_fallback("Fetch Data", lambda p: run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=build_script_env(p, run_content_dir)), providers_to_run)
+    run_task_with_fallback("Fetch Data", lambda p: run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=build_script_env(p, None)), providers_to_run)
 
     eprint("\n--- Stap 2: Curate Data ---")
     run_command(["python3", "-m", "src.curate"], env=os.environ.copy())
 
     eprint("\n--- Stap 3: Draft Newsletters ---")
-    run_task_with_fallback("Draft Newsletters", lambda p: run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=build_script_env(p, run_content_dir)), providers_to_run)
+    run_task_with_fallback("Draft Newsletters", lambda p: run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=build_script_env(p, newsletter_content_dir)), providers_to_run)
 
     # Stap 4: Genereer de Engelse outline (draait nu altijd)
     eprint("\n--- Stap 4: Generate Long-Read Outline ---")
     def task_select_and_generate_outline(provider_config):
-        env = build_script_env(provider_config, run_content_dir)
+        env = build_script_env(provider_config, None) # Geen content dir nodig voor deze stappen
         # Stap 4a: Selecteer onderwerp
         topic_process = run_command(["python3", "-m", "src.select_topic"], env=env)
         longread_topic = topic_process.stdout.strip()
@@ -205,7 +227,7 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     for lang_config in enabled_langs:
         lang_code = lang_config['code']
         lang_name = lang_config['name']
-        output_path = os.path.join(run_content_dir, f"longread_{target_date_iso}_{lang_code}.md")
+        output_path = os.path.join(longread_content_dir, f"longread_{target_date_iso}_{lang_code}.md")
 
         def task_generate_article(provider_config):
             run_command([
@@ -213,17 +235,17 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
                 "--outline-in", "longread_outline.json",
                 "-o", output_path,
                 "--lang-name", lang_name
-            ], env=build_script_env(provider_config, run_content_dir))
+            ], env=build_script_env(provider_config, None)) # Content dir niet nodig, output path is absoluut
         run_task_with_fallback(f"Generate Long-Read ({lang_name})", task_generate_article, providers_to_run)
     
     # Stap 5.5: Schrijf publicatie-URL (van de Engelse versie)
     eprint("\n--- Stap 5.5: Write Publication URL ---")
-    longread_filename_en = os.path.join(run_content_dir, f"longread_{target_date_iso}_en.md")
+    longread_filename_en = os.path.join(longread_content_dir, f"longread_{target_date_iso}_en.md")
     write_publication_url(os.getenv("SITE_BASE_URL"), longread_filename_en)
 
     # Stap 6: Generate Social Posts
     eprint("\n--- Stap 6: Generate Social Posts ---")
-    run_task_with_fallback("Generate Social Posts", lambda p: run_command(["python3", "-m", "src.generate_social_posts"], env=build_script_env(p, run_content_dir)), providers_to_run)
+    run_task_with_fallback("Generate Social Posts", lambda p: run_command(["python3", "-m", "src.generate_social_posts"], env=build_script_env(p, None)), providers_to_run)
 
     eprint("\n✅ Pijplijn voor content generatie voltooid.")
 

@@ -46,9 +46,6 @@
       {{ end }}
     </section>
     <section class="flex-ns flex-wrap justify-around mt5">
-      <div class="w-100">
-        <h2 class="f2">Posts</h2>
-      </div>
       {{ range (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
         <div class="relative w-100 w-30-l mb4 bg-white">
           <div class="bg-white mb3 pa4 gray overflow-hidden">

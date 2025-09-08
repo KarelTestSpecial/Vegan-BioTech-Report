@@ -1,41 +1,41 @@
 [
   {
     "platform": "facebook",
-    "text_content": "The future of food is changing, and it might be fowl-free! Our latest article dives deep into the FDA approval of animal-free egg white protein and its potential to revolutionize the egg industry. We explore the economic impacts, manufacturing opportunities, consumer perceptions, and ethical considerations surrounding this innovative technology. How will this affect traditional egg farmers and the sustainability of our food systems? Read the full analysis and share your thoughts! {{GHOST_ARTICLE_URL}}",
+    "text_content": "Is the future of food written in the air? 🌬️ Our latest deep dive explores the fascinating world of air-based protein, from Solar Foods' groundbreaking factory in Finland to the potential for a truly sustainable food source. We examine scalability, environmental impact, and consumer acceptance. Could this be the key to feeding a growing population? 🤔 Read the full article and join the conversation: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "🍳 Revolutionizing breakfast as we know it! 🍳 Animal-free egg white is here, and it's got the potential to change everything. From baking to ethical concerns, we're breaking it all down in our latest article. Check it out and let us know your thoughts in the comments! Link in bio. #veganbiotech #futureoffood #animalfree #eggwhite #cellularagriculture #foodtech",
+    "text_content": "Imagine eating food made from thin air! 🤯 Our new article dives into the science, the potential, and the challenges of air-based protein. Will it revolutionize our food system? Find out! Link in bio. #veganbiotech #futureoffood #sustainablefood #airprotein #solein #foodtech\n\nAlso, don't miss the news about Perfect Day partnering with Nestle for vegan chocolate milk and Ananas Anam collaborating with H&M for sustainable fashion!",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic lab setting where a scientist is examining a clear, egg-white-like substance in a petri dish. In the background, there are beakers and lab equipment, and holographic projections show images of chickens in a free-range environment. The overall tone is clean, modern, and optimistic, suggesting a positive future for food technology.",
+    "image_prompt": "A futuristic, brightly lit indoor vertical farm with gleaming metal fermentation tanks. Sunlight streams in, illuminating lush green plants growing alongside the tanks. The focus is on a single fermentation tank with a window showing bubbling, golden-colored liquid. A scientist in a clean white lab coat smiles and gestures towards the tank. In the background, sleek, modern architecture can be seen.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Animal-free egg white is here and the FDA has given it the green light! What does this mean for the future of our food system? Is this the end of factory farming for eggs? So many questions! 🤔 Read the full report and join the discussion! {{GHOST_ARTICLE_URL}}",
+    "text_content": "Air-based protein: food from thin air?! 🤯 Our latest article explores whether this is a viable future food source. What do you think? Could you see yourself eating air protein? Let's discuss! 👇 {{GHOST_ARTICLE_URL}} #futureoffood #veganbiotech",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Dive into the world of animal-free egg white! Our new article explores the impact of precision-fermented egg white protein, from its economic implications to ethical considerations. How will it change the food industry? Read the full analysis: {{GHOST_ARTICLE_URL}} #veganbiotech #cellularagriculture #futureoffood #eggwhite #sustainablefood",
+    "text_content": "New on the Vegan BioTech Report: A deep dive into air-based protein! We explore the science, scalability, environmental impact, and potential consumer acceptance of this novel food source. Is this the future of food? 🤔 Read the full article here: {{GHOST_ARTICLE_URL}} #veganbiotech #futureoffood #sustainablefood #airprotein #solein #foodtech",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone, I just finished reading a fascinating article about animal-free egg white protein and how it's poised to disrupt the entire egg industry! Apparently, the FDA just approved it, which is a HUGE step. The article goes deep into the economic implications, ethical considerations, and potential benefits for food manufacturers. It's really got me thinking about the future of food and how these kinds of innovations could revolutionize our food system. What do you all think about cellular agriculture and animal-free alternatives? Are you excited, skeptical, or somewhere in between? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey everyone! I just read this mind-blowing article about air-based protein - seriously, food made from *air*! It talks about how companies like Solar Foods are actually making this happen, the potential environmental benefits, and whether people will actually be willing to eat it. It really made me think about the future of food and how we can feed a growing population sustainably. What are your thoughts on this? Would you try air-based protein? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
-      "suggested_subreddit": "r/food",
-      "post_title": "Animal-Free Egg White: Revolutionizing the Food Industry?",
-      "primary_topic_keyword": "Food"
+      "suggested_subreddit": "r/science",
+      "post_title": "Air-Based Protein: Is This the Future of Food?",
+      "primary_topic_keyword": "Biotech"
     }
   }
 ]

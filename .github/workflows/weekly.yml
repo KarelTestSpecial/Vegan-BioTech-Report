@@ -21,24 +21,31 @@ on:
         default: false
 
 jobs:
-  # JOB 1: Genereer alle content en data bestanden
-  generate-content:
+  # JOB 1: Controleer of de workflow moet worden uitgevoerd (alleen op even weken)
+  check_week:
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'schedule' ||
-      (github.event_name == 'workflow_dispatch' && github.event.inputs.skip_content_generation != 'true')
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
     steps:
       - name: Check if week is even
-        if: github.event_name == 'schedule'
+        id: check
         run: |
-          week_number=$(date +%V)
-          if [ $((week_number % 2)) -ne 0 ]; then
-            echo "Skipping on odd week number: $week_number"
-            # Use exit code 78 to gracefully skip the job
-            exit 78
+          if [ $(( $(date +%V) % 2 )) -eq 0 ]; then
+            echo "Running on even week number: $(date +%V)"
+            echo "should_run=true" >> $GITHUB_OUTPUT
           else
-            echo "Running on even week number: $week_number"
+            echo "Skipping on odd week number: $(date +%V)"
+            echo "should_run=false" >> $GITHUB_OUTPUT
           fi
+
+  # JOB 2: Genereer alle content en data bestanden
+  generate-content:
+    runs-on: ubuntu-latest
+    needs: check_week
+    if: |
+      (github.event_name == 'schedule' && needs.check_week.outputs.should_run == 'true') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.skip_content_generation != 'true')
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up Python

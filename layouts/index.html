@@ -4,7 +4,7 @@
       {{- .Content -}}
     </section>
     <section class="flex-ns flex-wrap justify-around mt5">
-      {{ range where .Site.RegularPages "Section" "posts" }}
+      {{ range (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
         <div class="relative w-100 w-30-l mb4 bg-white">
           <div class="bg-white mb3 pa4 gray overflow-hidden">
             {{with .CurrentSection.Title }}<span class="f6 db">{{ . }}</span>{{end}}

@@ -5,7 +5,7 @@ date: 2025-09-08
 
 # Myceliumleer: De Toekomst van Duurzame Mode
 
-Stel je voor: een materiaal dat sterk, flexibel en waterafstotend is, en bovendien groeit in plaats van wordt geproduceerd. Een materiaal dat een duurzaam alternatief biedt voor leer en synthetische stoffen, en de potentie heeft om de mode-industrie radicaal te veranderen. Dit is geen sciencefiction, maar de realiteit van schimmelleer, ook wel myceliumleer genoemd. Deze innovatieve stof, gemaakt van de wortelstructuur van paddenstoelen, wint snel aan populariteit en wordt gezien als de toekomst van duurzame mode. Maar wat maakt schimmelleer zo bijzonder, en hoe kan het de mode-industrie transformeren?
+Stel je voor: een materiaal dat sterk, flexibel en waterafstotend is, en bovendien groeit in plaats van wordt geproduceerd. Een materiaal dat een duurzaam alternatief biedt voor leer en synthetische stoffen, en de potentie heeft om de mode-industrie radicaal te veranderen. Dit is geen sciencefiction, maar de realiteit van schimmelleer, ook wel myceliumleer genoemd. Deze innovatieve stof, gemaakt van de wortelstructuur van paddenstoelen, wint snel aan populariteit en wordt gezien als de toekomst van duurzame mode. Maar wat maakt myceliumleer zo bijzonder, en hoe kan het de mode-industrie transformeren?
 
 ## Wat is Myceliumleer Eigenlijk?
 

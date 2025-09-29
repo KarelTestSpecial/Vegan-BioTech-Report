@@ -1,0 +1,41 @@
+[
+  {
+    "platform": "facebook",
+    "text_content": "The dairy industry could be on the verge of a massive transformation! Nestle's recent partnership with Perfect Day to create animal-free ice cream is more than just a new product launch—it's a signal of a potential paradigm shift. Our latest article dives deep into how precision fermentation is poised to revolutionize dairy, the challenges it faces, and what it means for traditional dairy farming. What are your thoughts on animal-free dairy? Share in the comments! Read the full analysis here: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "instagram",
+    "text_content": "🍦 Animal-free ice cream is here! 🍦Nestle and Perfect Day are teaming up to change the dairy game with precision fermentation. Get ready for a future where your favorite treats are made without animals. What does this mean for the planet and the future of food? 🤔 Learn more about this groundbreaking partnership and the impact on the dairy industry. Link in bio! #vegan #biotech #futureoffood #perfectday #nestle #precisionfermentation #animalfreedairy #sustainablefood",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": "A futuristic, photorealistic image of a scoop of ice cream, with a glowing, lab-like background suggesting it was created using advanced technology. In the foreground, a happy, diverse group of people are enjoying the ice cream. The color palette should be bright and inviting, with a focus on blues, whites, and creams to emphasize the dairy-free aspect.",
+    "reddit_details": null
+  },
+  {
+    "platform": "bluesky",
+    "text_content": "Nestle's partnering with Perfect Day for animal-free ice cream! 🤯 Is this the beginning of the end for traditional dairy? Our new article explores the potential of precision fermentation to disrupt the dairy industry. Thoughts? {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "mastodon",
+    "text_content": "Nestle and Perfect Day are joining forces to bring animal-free ice cream to the masses using precision fermentation! 🍦 This could revolutionize the dairy industry and impact traditional farming. Our latest deep-dive examines the potential, the challenges, and what it all means for the future of food. Read the full article: {{GHOST_ARTICLE_URL}} #vegan #biotech #futureoffood #precisionfermentation #dairyindustry",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
+  },
+  {
+    "platform": "reddit",
+    "text_content": "Hey everyone, I just stumbled upon a fascinating article about Nestle partnering with Perfect Day to create animal-free ice cream using precision fermentation. It's got me thinking about the future of dairy and how this tech could completely change the game. What are your thoughts on precision fermentation and its impact on the environment, the economy, and even consumer habits? Do you think lab-grown dairy can actually taste as good as the real deal? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": {
+      "suggested_subreddit": "r/technology",
+      "post_title": "Nestle & Perfect Day: Animal-Free Ice Cream - A Dairy Revolution?",
+      "primary_topic_keyword": "Biotech"
+    }
+  }
+]

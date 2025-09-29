@@ -1,40 +1,35 @@
 [
   {
     "platform": "facebook",
-    "text_content": "The dairy industry could be on the verge of a massive transformation! Nestle's recent partnership with Perfect Day to create animal-free ice cream is more than just a new product launch—it's a signal of a potential paradigm shift. Our latest article dives deep into how precision fermentation is poised to revolutionize dairy, the challenges it faces, and what it means for traditional dairy farming. What are your thoughts on animal-free dairy? Share in the comments! Read the full analysis here: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
+    "text_content": "🌱 Exciting news for the plant-based community! Impossible Foods just secured $500 million in funding to continue growing their plant-based meat production. Read more about this game-changing development here: {{GHOST_ARTICLE_URL}} 🌱",
+    "link_to_share": "https://www.bloomberg.com/news/articles/2025-08-01/impossible-foods-secures-500-million-in-funding-for-plant-based-meat",
+    "image_prompt": "A vibrant image of a plant-based burger sizzling on a grill with the Impossible Foods logo in the background."
   },
   {
     "platform": "instagram",
-    "text_content": "🍦 Animal-free ice cream is here! 🍦Nestle and Perfect Day are teaming up to change the dairy game with precision fermentation. Get ready for a future where your favorite treats are made without animals. What does this mean for the planet and the future of food? 🤔 Learn more about this groundbreaking partnership and the impact on the dairy industry. Link in bio! #vegan #biotech #futureoffood #perfectday #nestle #precisionfermentation #animalfreedairy #sustainablefood",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "A futuristic, photorealistic image of a scoop of ice cream, with a glowing, lab-like background suggesting it was created using advanced technology. In the foreground, a happy, diverse group of people are enjoying the ice cream. The color palette should be bright and inviting, with a focus on blues, whites, and creams to emphasize the dairy-free aspect.",
-    "reddit_details": null
+    "text_content": "🌱🍔 Plant-based revolution is here! Impossible Foods just raised $500 million to keep growing their plant-based meat production. 🌱🍔 Link in bio for the full story! 🌱🍔",
+    "link_to_share": "https://www.bloomberg.com/news/articles/2025-08-01/impossible-foods-secures-500-million-in-funding-for-plant-based-meat",
+    "image_prompt": "A visually appealing image of a plant-based burger with the Impossible Foods logo and the caption 'Revolutionize Your Plate'."
   },
   {
     "platform": "bluesky",
-    "text_content": "Nestle's partnering with Perfect Day for animal-free ice cream! 🤯 Is this the beginning of the end for traditional dairy? Our new article explores the potential of precision fermentation to disrupt the dairy industry. Thoughts? {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
+    "text_content": "Just heard about Impossible Foods securing $500 million in funding for plant-based meat production! Exciting times ahead for the plant-based community! Check out the full story here: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "https://www.bloomberg.com/news/articles/2025-08-01/impossible-foods-secures-500-million-in-funding-for-plant-based-meat",
+    "image_prompt": "A creative, engaging image of a plant-based burger with the Impossible Foods logo and the caption 'Plant-Based Revolution'."
   },
   {
     "platform": "mastodon",
-    "text_content": "Nestle and Perfect Day are joining forces to bring animal-free ice cream to the masses using precision fermentation! 🍦 This could revolutionize the dairy industry and impact traditional farming. Our latest deep-dive examines the potential, the challenges, and what it all means for the future of food. Read the full article: {{GHOST_ARTICLE_URL}} #vegan #biotech #futureoffood #precisionfermentation #dairyindustry",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
-    "reddit_details": null
+    "text_content": "🌱🍔 Exciting news! Impossible Foods just secured $500 million in funding to continue growing their plant-based meat production. Read more about this game-changer here: {{GHOST_ARTICLE_URL}} #plantbased #vegan #biotech #innovation",
+    "link_to_share": "https://www.bloomberg.com/news/articles/2025-08-01/impossible-foods-secures-500-million-in-funding-for-plant-based-meat",
+    "image_prompt": "A captivating image of a plant-based burger with the Impossible Foods logo and the caption 'Plant-Based Future'."
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone, I just stumbled upon a fascinating article about Nestle partnering with Perfect Day to create animal-free ice cream using precision fermentation. It's got me thinking about the future of dairy and how this tech could completely change the game. What are your thoughts on precision fermentation and its impact on the environment, the economy, and even consumer habits? Do you think lab-grown dairy can actually taste as good as the real deal? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": null,
+    "text_content": "Just read about Impossible Foods securing $500 million in funding for plant-based meat production! This is a huge step forward for the plant-based community. What do you think this means for the future of plant-based meat? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "https://www.bloomberg.com/news/articles/2025-08-01/impossible-foods-secures-500-million-in-funding-for-plant-based-meat",
     "reddit_details": {
-      "suggested_subreddit": "r/technology",
-      "post_title": "Nestle & Perfect Day: Animal-Free Ice Cream - A Dairy Revolution?",
+      "suggested_subreddit": "r/futurology",
+      "post_title": "Impossible Foods Secures $500 Million for Plant-Based Meat: A Game-Changer for the Plant-Based Community",
       "primary_topic_keyword": "Biotech"
     }
   }

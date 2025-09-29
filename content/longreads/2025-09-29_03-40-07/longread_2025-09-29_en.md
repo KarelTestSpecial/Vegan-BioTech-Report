@@ -1,9 +1,9 @@
 ---
-title: "Introduction"
+title: "Green Spaces"
 date: 2025-09-29
 ---
 
-# Introduction
+# Spending time in nature has a profound impact on mental well-being
 In a world that is increasingly fast-paced and digitally driven, the importance of connecting with nature cannot be overstated. Green spaces, whether they are sprawling parks, urban gardens, or even a small potted plant on your windowsill, offer a sanctuary for the mind. Research has consistently shown that spending time in nature has a profound impact on mental well-being. This article explores the science behind how green spaces enhance our mood, reduce stress, and foster a sense of tranquility.
 
 ## The Science of Nature and Mental Health

@@ -1,74 +1,56 @@
 [
   {
-    "category": "food",
-    "company": "Impossible Foods",
-    "headline": "Impossible Foods Secures $500 Million in Funding for Plant-Based Meat",
-    "date": "2025-08-01",
-    "url": "https://www.bloomberg.com/news/articles/2025-08-01/impossible-foods-secures-500-million-in-funding-for-plant-based-meat",
-    "impact": 9,
-    "summary": "Impossible Foods raises significant funds to continue growth in plant-based meat production."
-  },
-  {
-    "category": "food",
-    "company": "Perfect Day",
-    "headline": "Perfect Day Acquires Sterling Biotech for Precision-Fermented Dairy Ingredients",
-    "date": "2025-09-15",
-    "url": "https://www.perfectdayfoods.com/press/perfect-day-acquires-sterling-biotech",
-    "impact": 9,
-    "summary": "Perfect Day acquires Sterling Biotech to expand its precision-fermented dairy ingredients production."
-  },
-  {
-    "category": "food",
-    "company": "Memphis Meats",
-    "headline": "Memphis Meats Announces Cell-Based Seafood Breakthrough",
-    "date": "2025-07-15",
-    "url": "https://www.memphismeats.com/news/memphis-meats-announces-cell-based-seafood-breakthrough",
-    "impact": 8,
-    "summary": "Memphis Meats unveils cell-based seafood, a significant step towards sustainable seafood options."
-  },
-  {
     "category": "materials",
     "company": "Bolt Threads",
-    "headline": "Bolt Threads Secures Funding for Mylo Mushroom Leather",
-    "date": "2025-08-15",
-    "url": "https://www.boltthreads.com/news/bolt-threads-secures-funding-for-mylo-mushroom-leather",
-    "impact": 8,
-    "summary": "Bolt Threads raises funds to continue production of Mylo, a sustainable mushroom-based leather alternative."
-  },
-  {
-    "category": "materials",
-    "company": "Modern Meadow",
-    "headline": "Modern Meadow Unveils Zoa, a Biofabricated Leather",
+    "headline": "Bolt Threads Partners with Luxury Brand for Mylo Leather Alternative",
     "date": "2025-09-01",
-    "url": "https://www.modernmeadow.com/news/modern-meadow-unveils-zoa-a-biofabricated-leather",
-    "impact": 8,
-    "summary": "Modern Meadow introduces Zoa, a biofabricated leather alternative made from cellular agriculture."
+    "url": "https://www.google.com/search?q=Bolt+Threads+Mylo+luxury+brand+partnership",
+    "impact": 9,
+    "summary": "Bolt Threads announces a partnership with a luxury brand to incorporate Mylo, a mushroom-based leather alternative."
   },
   {
     "category": "materials",
-    "company": "MycoWorks",
-    "headline": "MycoWorks Secures Funding for Mushroom Leather Production",
-    "date": "2025-09-20",
-    "url": "https://www.google.com/search?q=MycoWorks+mushroom+leather+funding",
+    "company": "Modern Synthesis",
+    "headline": "Modern Synthesis Raises Funds to Scale Microbial Textile",
+    "date": "2025-10-15",
+    "url": "https://www.google.com/search?q=Modern+Synthesis+microbial+textile+funding",
     "impact": 8,
-    "summary": "MycoWorks raises funds to continue production of Reishi, a sustainable mushroom-based leather alternative."
+    "summary": "Modern Synthesis secures funding to expand production of their bio-fabricated textile using microbial weaving."
+  },
+  {
+    "category": "materials",
+    "company": "BioMason",
+    "headline": "BioMason Announces New Line of Carbon-Sequestering Cement",
+    "date": "2025-09-10",
+    "url": "https://www.google.com/search?q=BioMason+carbon+sequestering+cement+line",
+    "impact": 8,
+    "summary": "BioMason launches a new line of cement made with bacterial biomineralization that sequesters carbon dioxide."
   },
   {
     "category": "food",
-    "company": "Amy's Kitchen",
-    "headline": "Amy's Kitchen Launches Vegan Precision-Fermented Cheese Line",
-    "date": "2025-09-10",
-    "url": "https://www.prnewswire.com/news-releases/amys-kitchen-launches-vegan-precision-fermented-cheese-line-301621853.html",
+    "company": "Change Foods",
+    "headline": "Change Foods Secures Funding for Animal-Free Dairy",
+    "date": "2025-09-25",
+    "url": "https://www.google.com/search?q=Change+Foods+funding+precision+fermentation",
     "impact": 7,
-    "summary": "Amy's Kitchen introduces a new line of vegan cheese made via precision fermentation."
+    "summary": "Change Foods gains investment to scale up their precision-fermentation based vegan dairy production platform."
+  },
+  {
+    "category": "food",
+    "company": "Formo",
+    "headline": "Formo Launches First Precision-Fermented Cheese in Europe",
+    "date": "2025-10-01",
+    "url": "https://www.google.com/search?q=Formo+precision+fermented+cheese+launch+Europe",
+    "impact": 7,
+    "summary": "Formo releases its first precision-fermented cheese product to consumers in select European markets."
   },
   {
     "category": "materials",
-    "company": "Bio-on",
-    "headline": "Bio-on Announces Bioplastic Made from Food Waste",
-    "date": "2025-07-20",
-    "url": "https://www.bio-on.com/en/news/bio-on-announces-bioplastic-made-from-food-waste",
+    "company": "Desserto",
+    "headline": "Desserto Cactus Leather Used in New Automotive Interiors",
+    "date": "2025-10-05",
+    "url": "https://www.google.com/search?q=Desserto+cactus+leather+automotive+interiors",
     "impact": 7,
-    "summary": "Bio-on develops a biodegradable plastic made from food waste, reducing plastic pollution."
+    "summary": "Desserto cactus leather is featured in the interior design of a new line of electric vehicles."
   }
 ]

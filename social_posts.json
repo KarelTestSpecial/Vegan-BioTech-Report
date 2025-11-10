@@ -1,35 +1,40 @@
 [
   {
     "platform": "facebook",
-    "text_content": "🌱 Exciting news for the plant-based community! Impossible Foods just secured $500 million in funding to continue growing their plant-based meat production. Read more about this game-changing development here: {{GHOST_ARTICLE_URL}} 🌱",
-    "link_to_share": "https://www.bloomberg.com/news/articles/2025-08-01/impossible-foods-secures-500-million-in-funding-for-plant-based-meat",
-    "image_prompt": "A vibrant image of a plant-based burger sizzling on a grill with the Impossible Foods logo in the background."
+    "text_content": "Is mushroom leather the future of luxury fashion, or just a fleeting trend? Our latest deep dive explores the rise of mycelium-based materials like Mylo, examining their sustainability claims, scalability challenges, and consumer appeal. We break down the environmental impact, production hurdles, and long-term implications of this innovative bio-material. Read the full analysis here: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "🌱🍔 Plant-based revolution is here! Impossible Foods just raised $500 million to keep growing their plant-based meat production. 🌱🍔 Link in bio for the full story! 🌱🍔",
-    "link_to_share": "https://www.bloomberg.com/news/articles/2025-08-01/impossible-foods-secures-500-million-in-funding-for-plant-based-meat",
-    "image_prompt": "A visually appealing image of a plant-based burger with the Impossible Foods logo and the caption 'Revolutionize Your Plate'."
+    "text_content": "✨🍄 Move over, leather! Is mushroom leather the sustainable material of the future, or just a fad? 🌱 Our latest article dives deep into the world of Mylo and other mycelium-based materials, exploring their potential to revolutionize the luxury fashion industry. From environmental impact to scalability, we've got you covered. Link in bio! #mushroomleather #mylo #biomaterials #sustainablefashion #luxuryfashion #vegan #innovation #biotech",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": "Close-up shot of a luxurious handbag made from mushroom leather (Mylo), showcasing its texture and design, with a soft, diffused background highlighting the sustainable and ethical aspects of the material.",
+    "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Just heard about Impossible Foods securing $500 million in funding for plant-based meat production! Exciting times ahead for the plant-based community! Check out the full story here: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "https://www.bloomberg.com/news/articles/2025-08-01/impossible-foods-secures-500-million-in-funding-for-plant-based-meat",
-    "image_prompt": "A creative, engaging image of a plant-based burger with the Impossible Foods logo and the caption 'Plant-Based Revolution'."
+    "text_content": "Mushroom leather: fad or future? 🤔 Our new article explores whether mycelium-based materials can really disrupt luxury fashion. Sustainability claims, scalability challenges, consumer perceptions - we dig into it all! {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "🌱🍔 Exciting news! Impossible Foods just secured $500 million in funding to continue growing their plant-based meat production. Read more about this game-changer here: {{GHOST_ARTICLE_URL}} #plantbased #vegan #biotech #innovation",
-    "link_to_share": "https://www.bloomberg.com/news/articles/2025-08-01/impossible-foods-secures-500-million-in-funding-for-plant-based-meat",
-    "image_prompt": "A captivating image of a plant-based burger with the Impossible Foods logo and the caption 'Plant-Based Future'."
+    "text_content": "Is mushroom leather the next big thing in luxury fashion? Or is it just a fungal fad? Our latest article examines the sustainability, scalability, and consumer appeal of mycelium-based materials like Mylo. Read the full analysis and join the discussion! #mushroomleather #biomaterials #sustainablefashion #luxuryfashion #vegan #innovation #biotech {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
+    "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Just read about Impossible Foods securing $500 million in funding for plant-based meat production! This is a huge step forward for the plant-based community. What do you think this means for the future of plant-based meat? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
-    "link_to_share": "https://www.bloomberg.com/news/articles/2025-08-01/impossible-foods-secures-500-million-in-funding-for-plant-based-meat",
+    "text_content": "Hey everyone, I just read this fascinating article about mushroom leather and its potential impact on the luxury fashion industry. It dives into whether it can truly deliver on its promises of sustainability and scalability. Honestly, I'm a bit skeptical but also super intrigued by the tech. What do you all think? Is this a game-changer or just another greenwashing attempt? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "link_to_share": "{{GHOST_ARTICLE_URL}}",
+    "image_prompt": null,
     "reddit_details": {
-      "suggested_subreddit": "r/futurology",
-      "post_title": "Impossible Foods Secures $500 Million for Plant-Based Meat: A Game-Changer for the Plant-Based Community",
+      "suggested_subreddit": "r/technology",
+      "post_title": "Mushroom Leather: Sustainable Revolution or Fungal Fad?",
       "primary_topic_keyword": "Biotech"
     }
   }

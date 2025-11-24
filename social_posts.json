@@ -1,40 +1,40 @@
 [
   {
     "platform": "facebook",
-    "text_content": "Is mushroom leather the future of luxury fashion, or just a fleeting trend? Our latest deep dive explores the rise of mycelium-based materials like Mylo, examining their sustainability claims, scalability challenges, and consumer appeal. We break down the environmental impact, production hurdles, and long-term implications of this innovative bio-material. Read the full analysis here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Is air-based protein the answer to global food security? Solar Foods just opened its first commercial Solein production plant, and the implications are huge! This could revolutionize how we produce food, reducing our reliance on traditional agriculture and mitigating climate change. Our latest article dives deep into the potential of air-based protein, its impact on land use, and the challenges that lie ahead. Read more about this groundbreaking technology: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "instagram",
-    "text_content": "✨🍄 Move over, leather! Is mushroom leather the sustainable material of the future, or just a fad? 🌱 Our latest article dives deep into the world of Mylo and other mycelium-based materials, exploring their potential to revolutionize the luxury fashion industry. From environmental impact to scalability, we've got you covered. Link in bio! #mushroomleather #mylo #biomaterials #sustainablefashion #luxuryfashion #vegan #innovation #biotech",
+    "text_content": "Imagine feeding the world with protein made from air! 🤯 Solar Foods is making it a reality with their new Solein production plant. Our latest article explores the potential of air-based protein to revolutionize food production. Link in bio to learn more! #veganbiotech #futureoffood #solein #airbasedprotein #sustainablefood #foodtech\n\nIMAGE PROMPT: A futuristic cityscape with towering vertical farms and a massive, gleaming air purification and protein synthesis plant in the center. The sky is clear blue, and solar panels cover the top of the plant. Include subtle vegan biotech report branding.",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
-    "image_prompt": "Close-up shot of a luxurious handbag made from mushroom leather (Mylo), showcasing its texture and design, with a soft, diffused background highlighting the sustainable and ethical aspects of the material.",
+    "image_prompt": "A futuristic cityscape with towering vertical farms and a massive, gleaming air purification and protein synthesis plant in the center. The sky is clear blue, and solar panels cover the top of the plant. Include subtle vegan biotech report branding.",
     "reddit_details": null
   },
   {
     "platform": "bluesky",
-    "text_content": "Mushroom leather: fad or future? 🤔 Our new article explores whether mycelium-based materials can really disrupt luxury fashion. Sustainability claims, scalability challenges, consumer perceptions - we dig into it all! {{GHOST_ARTICLE_URL}}",
+    "text_content": "Solar Foods just opened its first commercial Solein plant! Air-based protein could be a game changer for food security and sustainability. 🤔 Is this the future of food? Check out our deep dive! {{GHOST_ARTICLE_URL}} #veganbiotech #futureoffood",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "mastodon",
-    "text_content": "Is mushroom leather the next big thing in luxury fashion? Or is it just a fungal fad? Our latest article examines the sustainability, scalability, and consumer appeal of mycelium-based materials like Mylo. Read the full analysis and join the discussion! #mushroomleather #biomaterials #sustainablefashion #luxuryfashion #vegan #innovation #biotech {{GHOST_ARTICLE_URL}}",
+    "text_content": "Exciting news in the world of #veganbiotech! Solar Foods has launched its first commercial Solein production plant, pioneering air-based protein. Our latest article explores the potential of this innovative technology to address global food security and reshape agriculture. Learn more about the future of food: {{GHOST_ARTICLE_URL}}\n\n#futureoffood #sustainablefood #foodtech #airbasedprotein #SolarFoods",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": null
   },
   {
     "platform": "reddit",
-    "text_content": "Hey everyone, I just read this fascinating article about mushroom leather and its potential impact on the luxury fashion industry. It dives into whether it can truly deliver on its promises of sustainability and scalability. Honestly, I'm a bit skeptical but also super intrigued by the tech. What do you all think? Is this a game-changer or just another greenwashing attempt? Full deep-dive here: {{GHOST_ARTICLE_URL}}",
+    "text_content": "Hey everyone, I just read the most fascinating article about Solar Foods and their new Solein plant! They're literally making protein from air and electricity! It sounds like something out of science fiction, but it could have a massive impact on food security and sustainability. What are your thoughts on this? Could air-based protein be a real solution to global hunger? I'm curious to hear what you all think. Full deep-dive here: {{GHOST_ARTICLE_URL}}",
     "link_to_share": "{{GHOST_ARTICLE_URL}}",
     "image_prompt": null,
     "reddit_details": {
       "suggested_subreddit": "r/technology",
-      "post_title": "Mushroom Leather: Sustainable Revolution or Fungal Fad?",
+      "post_title": "Solar Foods Opens First Air-Based Protein Plant: A Game Changer?",
       "primary_topic_keyword": "Biotech"
     }
   }

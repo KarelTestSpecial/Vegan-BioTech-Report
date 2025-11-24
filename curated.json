@@ -1,56 +1,56 @@
 [
   {
-    "category": "materials",
-    "company": "Bolt Threads",
-    "headline": "Bolt Threads Partners with Luxury Brand for Mylo Leather Alternative",
-    "date": "2025-09-01",
-    "url": "https://www.google.com/search?q=Bolt+Threads+Mylo+luxury+brand+partnership",
+    "category": "food",
+    "company": "Solar Foods",
+    "headline": "Solar Foods Opens First Commercial Solein Production Plant",
+    "date": "2025-11-01",
+    "url": "https://www.google.com/search?q=Solar+Foods+commercial+Solein+plant+opens",
     "impact": 9,
-    "summary": "Bolt Threads announces a partnership with a luxury brand to incorporate Mylo, a mushroom-based leather alternative."
-  },
-  {
-    "category": "materials",
-    "company": "Modern Synthesis",
-    "headline": "Modern Synthesis Raises Funds to Scale Microbial Textile",
-    "date": "2025-10-15",
-    "url": "https://www.google.com/search?q=Modern+Synthesis+microbial+textile+funding",
-    "impact": 8,
-    "summary": "Modern Synthesis secures funding to expand production of their bio-fabricated textile using microbial weaving."
+    "summary": "Solar Foods inaugurates its first commercial plant for producing Solein, a protein made from air and electricity."
   },
   {
     "category": "materials",
     "company": "BioMason",
-    "headline": "BioMason Announces New Line of Carbon-Sequestering Cement",
-    "date": "2025-09-10",
-    "url": "https://www.google.com/search?q=BioMason+carbon+sequestering+cement+line",
+    "headline": "BioMason Secures Investment for Sustainable Cement Alternative",
+    "date": "2025-09-28",
+    "url": "https://www.google.com/search?q=BioMason+investment+sustainable+cement",
+    "impact": 9,
+    "summary": "BioMason receives a significant investment to scale production of its biologically-grown cement alternative for construction."
+  },
+  {
+    "category": "materials",
+    "company": "Modern Synthesis",
+    "headline": "Modern Synthesis Raises $4.1M to Scale Microbial Textile Platform",
+    "date": "2025-10-16",
+    "url": "https://www.google.com/search?q=Modern+Synthesis+microbial+textile+platform+funding",
     "impact": 8,
-    "summary": "BioMason launches a new line of cement made with bacterial biomineralization that sequesters carbon dioxide."
+    "summary": "Modern Synthesis secures funding to expand its bio-fabrication of materials using microbial processes."
+  },
+  {
+    "category": "food",
+    "company": "The Every Company",
+    "headline": "The Every Company Partners with Restaurant Chains for Egg White Alternative",
+    "date": "2025-11-15",
+    "url": "https://www.google.com/search?q=The+Every+Company+restaurant+chains+egg+white",
+    "impact": 8,
+    "summary": "The Every Company's animal-free egg white alternative is now available in select restaurant chains, increasing accessibility."
   },
   {
     "category": "food",
     "company": "Change Foods",
     "headline": "Change Foods Secures Funding for Animal-Free Dairy",
-    "date": "2025-09-25",
-    "url": "https://www.google.com/search?q=Change+Foods+funding+precision+fermentation",
+    "date": "2025-10-27",
+    "url": "https://www.google.com/search?q=Change+Foods+funding+animal-free+dairy",
     "impact": 7,
-    "summary": "Change Foods gains investment to scale up their precision-fermentation based vegan dairy production platform."
-  },
-  {
-    "category": "food",
-    "company": "Formo",
-    "headline": "Formo Launches First Precision-Fermented Cheese in Europe",
-    "date": "2025-10-01",
-    "url": "https://www.google.com/search?q=Formo+precision+fermented+cheese+launch+Europe",
-    "impact": 7,
-    "summary": "Formo releases its first precision-fermented cheese product to consumers in select European markets."
+    "summary": "Change Foods received funding to scale up its precision-fermentation dairy production, aiming for commercial launch."
   },
   {
     "category": "materials",
-    "company": "Desserto",
-    "headline": "Desserto Cactus Leather Used in New Automotive Interiors",
-    "date": "2025-10-05",
-    "url": "https://www.google.com/search?q=Desserto+cactus+leather+automotive+interiors",
+    "company": "Bolt Threads",
+    "headline": "Bolt Threads Expands Mylo Production Capacity",
+    "date": "2025-09-10",
+    "url": "https://www.google.com/search?q=Bolt+Threads+Mylo+production+expansion",
     "impact": 7,
-    "summary": "Desserto cactus leather is featured in the interior design of a new line of electric vehicles."
+    "summary": "Bolt Threads increases production capacity for Mylo, its mushroom-based leather alternative, to meet rising demand."
   }
 ]

@@ -51,52 +51,6 @@ def archive_output_files():
 
     eprint(f"Oude output-bestanden gearchiveerd in: {run_archive_dir}")
 
-def archive_content_files(new_run_timestamp: str):
-    """Zoekt alle content van vorige runs en voegt 'archived: true' toe aan de front matter."""
-    eprint("Zoeken naar content van vorige runs om te archiveren...")
-    content_dirs = ["content/newsletters", "content/longreads"]
-    archived_count = 0
-
-    for content_dir in content_dirs:
-        if not os.path.exists(content_dir):
-            continue
-
-        for dir_name in os.listdir(content_dir):
-            if dir_name == new_run_timestamp:
-                continue # Sla de content van de HUIDIGE run over
-
-            dir_path = os.path.join(content_dir, dir_name)
-            if not os.path.isdir(dir_path):
-                continue
-
-            for filename in glob.glob(os.path.join(dir_path, "*.md")):
-                try:
-                    with open(filename, 'r+', encoding='utf-8') as f:
-                        content = f.read()
-                        if '---' in content and 'archived: true' not in content:
-                            # Zoek de positie van de tweede '---'
-                            parts = content.split('---', 2)
-                            if len(parts) >= 3:
-                                front_matter = parts[1]
-                                body = parts[2]
-                                new_front_matter = front_matter.strip() + '\narchived: true\n'
-                                new_content = f"---
-{new_front_matter}
----
-{body}"
-                                f.seek(0)
-                                f.write(new_content)
-                                f.truncate()
-                                eprint(f"  - Gearchiveerd: {filename}")
-                                archived_count += 1
-                except Exception as e:
-                    eprint(f"  - Fout bij verwerken van {filename}: {e}")
-
-    if archived_count > 0:
-        eprint(f"✅ {archived_count} contentbestanden van vorige runs zijn gemarkeerd als gearchiveerd.")
-    else:
-        eprint("Geen nieuwe bestanden gevonden om te archiveren.")
-
 def get_provider_list():
     """Haalt de lijst van AI providers op uit providers.json."""
     try:
@@ -161,9 +115,8 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
 
     if not no_archive:
         archive_output_files()
-        archive_content_files(run_timestamp)
     else:
-        eprint("Archivering overgeslagen vanwege de --no-archive vlag.")
+        eprint("Archivering van output bestanden overgeslagen vanwege de --no-archive vlag.")
 
     target_date = datetime.date.today()
     if target_date_str:

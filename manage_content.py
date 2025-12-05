@@ -44,10 +44,11 @@ def set_archive_status(filepath, archive: bool):
             lines = [line for line in lines if "archived: true" not in line]
 
         new_front_matter = "\n".join(lines)
-        new_content = f"---
+        new_content = f"""---
 {new_front_matter}
 ---
-{body}"
+{body}
+"""
 
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(new_content)

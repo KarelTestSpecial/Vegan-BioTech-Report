@@ -1,0 +1,37 @@
+name: 3. Run Content Pipeline
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '0 8 1 * *' # Draait om 08:00 op de eerste dag van elke maand
+
+jobs:
+  run_pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run content generation pipeline
+        env:
+          AI_API_TYPE: ${{ secrets.AI_API_TYPE }}
+          AI_MODEL_ID: ${{ secrets.AI_MODEL_ID }}
+          AI_API_KEY_OPENAI: ${{ secrets.AI_API_KEY_OPENAI }}
+          AI_API_KEY_GOOGLE: ${{ secrets.AI_API_KEY_GOOGLE }}
+          # Voeg hier eventuele andere secrets toe die de pipeline nodig heeft
+        run: python -m pipeline.run_pipeline
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "feat(content): Generate new content via GitHub Action"
+          branch: main
+          commit_options: '--no-verify'

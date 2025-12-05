@@ -17,12 +17,8 @@ Dit document beschrijft de verschillende geautomatiseerde workflows die worden g
 
 -   **Workflow-bestand:** `manage-content.yml`
 -   **Doel:** Maakt het mogelijk om de status van content te wijzigen. Hiermee bepaal je welke artikelen live staan en welke gearchiveerd zijn.
--   **Hoe te starten:** Deze workflow moet handmatig worden gestart. Bij het starten verschijnt een formulier met de volgende keuzes:
-    -   `archive-live-content`: Zet alle huidige live content op 'archived'.
-    -   `unarchive-latest-content`: Zet de meest recent gearchiveerde content op 'live'.
-    -   `set-specific-files-archived`: Archiveert specifieke bestanden (je moet de volledige paden naar de bestanden opgeven).
-    -   `set-specific-files-live`: Zet specifieke gearchiveerde bestanden op 'live'.
--   **Wat het doet:** Op basis van de gekozen actie wordt het `manage_content.py` script uitgevoerd om de front matter (`archived: true/false`) in de betreffende Markdown-bestanden aan te passen. De wijzigingen worden automatisch gecommit en naar de `main` branch gepusht.
+-   **Hoe te starten:** Deze workflow moet handmatig worden gestart. Bij het starten verschijnt een formulier met keuzes om content te archiveren of live te zetten.
+-   **Wat het doet:** Op basis van de gekozen actie wordt het `manage_content.py` script uitgevoerd om de front matter (`archived: true/false`) in de betreffende Markdown-bestanden aan te passen. De wijzigingen worden automatisch gecommit.
 
 ---
 
@@ -51,7 +47,7 @@ Dit document beschrijft de verschillende geautomatiseerde workflows die worden g
 -   **Workflow-bestand:** `monthly.yml`
 -   **Doel:** Een volledig **geautomatiseerde, maandelijkse cyclus** van contentcreatie en publicatie. Dit is de primaire workflow voor het onderhouden van de site.
 -   **Hoe te starten:**
-    -   **Automatisch:** Draait op de eerste dag van elke maand om 08:00 UTC.
+    -   **Automatisch:** Draait op de eerste dag van elke maand om 03:00 UTC.
     -   **Handmatig:** Kan ook handmatig worden gestart.
 -   **Wat het doet:** Dit is een gecombineerde workflow die de volgende stappen uitvoert:
     1.  **Genereert content:** Voert de volledige content generatie pijplijn uit.

@@ -29,33 +29,37 @@ Dit document beschrijft de verschillende geautomatiseerde workflows die worden g
 ## 3. Run Content Pipeline
 
 -   **Workflow-bestand:** `run-content-pipeline.yml`
--   **Doel:** Start het volledige proces voor het genereren van nieuwe content (nieuwsbrieven en longreads).
--   **Hoe te starten:** Deze workflow kan handmatig worden gestart.
--   **Wat het doet:** De workflow installeert de benodigde Python-packages en voert vervolgens de volledige `pipeline/run_pipeline.py` uit. Dit script doorloopt alle stappen, van het ophalen van nieuws tot het schrijven van de uiteindelijke artikelen. De nieuw gegenereerde content wordt automatisch gecommit en gepusht naar de `main` branch.
+-   **Doel:** Start **handmatig** het proces voor het genereren van een nieuwe set content (nieuwsbrieven en longreads).
+-   **Hoe te starten:** Deze workflow kan op elk gewenst moment handmatig worden gestart via het Actions-tabblad.
+-   **Wat het doet:** De workflow voert de volledige `pipeline/run_pipeline.py` uit. De nieuw gegenereerde content wordt automatisch opgeslagen in de repository. **Let op:** deze workflow publiceert de site *niet* opnieuw. De nieuwe content wordt pas zichtbaar nadat de "Deploy" workflow is uitgevoerd.
 
 ---
 
 ## 4. Deploy Hugo Site to Pages
 
 -   **Workflow-bestand:** `deploy.yml`
--   **Doel:** Publiceert de website naar GitHub Pages, waardoor deze publiek zichtbaar wordt.
+-   **Doel:** Publiceert de huidige staat van de website naar GitHub Pages.
 -   **Hoe te starten:**
-    -   **Automatisch:** Deze workflow wordt automatisch gestart na elke push naar de `main` branch (bijvoorbeeld nadat nieuwe content is gegenereerd of de status is aangepast).
+    -   **Automatisch:** Start na elke push naar de `main` branch.
     -   **Handmatig:** Kan ook handmatig worden gestart.
--   **Wat het doet:** De workflow bouwt de Hugo-website met de "extended" versie van Hugo. Het resultaat is een statische website in de `public` map. Vervolgens wordt de inhoud van deze map geïmplementeerd op GitHub Pages. De term `pages-build-deployment` die je op de Actions-pagina ziet, is de naam van de specifieke deploy-stap binnen deze workflow.
+-   **Wat het doet:** De workflow bouwt de Hugo-website en implementeert het resultaat op GitHub Pages. Dit is de workflow die ervoor zorgt dat wijzigingen (nieuwe content, status-updates) daadwerkelijk online zichtbaar worden.
 
 ---
 
-## 5. Weekly Content Generation and Deploy
+## 5. Monthly Content Generation and Deploy
 
--   **Workflow-bestand:** `weekly.yml`
--   **Doel:** Een volledig geautomatiseerde, wekelijkse cyclus van contentcreatie en publicatie.
+-   **Workflow-bestand:** `monthly.yml`
+-   **Doel:** Een volledig **geautomatiseerde, maandelijkse cyclus** van contentcreatie en publicatie. Dit is de primaire workflow voor het onderhouden van de site.
 -   **Hoe te starten:**
-    -   **Automatisch:** Draait elke maandagochtend om 03:05 UTC. De workflow draait echter alleen inhoudelijk als het een **even weeknummer** is.
-    -   **Handmatig:** Kan op elk moment handmatig worden gestart.
+    -   **Automatisch:** Draait op de eerste dag van elke maand om 08:00 UTC.
+    -   **Handmatig:** Kan ook handmatig worden gestart.
 -   **Wat het doet:** Dit is een gecombineerde workflow die de volgende stappen uitvoert:
-    1.  **Controleert de week:** Bepaalt of het een even week is. Zo niet, dan stopt de geplande run.
-    2.  **Genereert content:** Voert de volledige content generatie pijplijn uit, net als de "Run Content Pipeline" workflow.
-    3.  **Commit content:** Slaat de nieuwe artikelen op in de `main` branch.
-    4.  **Bouwt en deployt de site:** Publiceert de bijgewerkte site naar GitHub Pages.
-    5.  **Verstuurt een notificatie:** Stuurt een e-mail om te laten weten of de workflow succesvol was of niet.
+    1.  **Genereert content:** Voert de volledige content generatie pijplijn uit.
+    2.  **Commit content:** Slaat de nieuwe artikelen op in de `main` branch.
+    3.  **Bouwt en deployt de site:** Publiceert de bijgewerkte site, inclusief de nieuwe content, direct naar GitHub Pages.
+    4.  **Verstuurt een notificatie:** Stuurt een e-mail om te laten weten of de workflow succesvol was.
+
+### Wat is het verschil tussen "Run Content Pipeline" en "Monthly Content Generation"?
+
+-   **Run Content Pipeline** is voor **handmatige** acties. Het genereert alleen de bestanden, maar zet ze niet live. Dit is handig als je content wilt genereren en controleren *voordat* het gepubliceerd wordt.
+-   **Monthly Content Generation and Deploy** is de **volledig geautomatiseerde** workflow. Het genereert de content én publiceert deze onmiddellijk. Dit is de "set-and-forget" workflow die de site maandelijks van nieuwe inhoud voorziet.

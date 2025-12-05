@@ -55,6 +55,18 @@ Dit document beschrijft de verschillende geautomatiseerde workflows die worden g
     3.  **Bouwt en deployt de site:** Publiceert de bijgewerkte site, inclusief de nieuwe content, direct naar GitHub Pages.
     4.  **Verstuurt een notificatie:** Stuurt een e-mail om te laten weten of de workflow succesvol was.
 
+---
+
+## Overige Workflows
+
+### pages-build-deployment
+
+Je zult deze workflow in de lijst zien, maar je kunt hem niet handmatig starten. Dit is normaal.
+
+-   **Doel:** Dit is een **interne, automatische workflow van GitHub zelf**. Het is de allerlaatste stap in het publicatieproces van de website.
+-   **Hoe het start:** Deze workflow wordt automatisch door GitHub geactiveerd zodra een van onze andere workflows (zoals "Deploy Hugo Site to Pages" of "Monthly Content Generation") een nieuwe versie van de website heeft gebouwd en aanbiedt voor publicatie.
+-   **Wat het doet:** Het pakt de door ons voorbereide websitebestanden en zet deze daadwerkelijk live op de server van GitHub Pages. Je kunt het zien als de 'bezorgdienst' van GitHub die de site aflevert.
+
 ### Wat is het verschil tussen "Run Content Pipeline" en "Monthly Content Generation"?
 
 -   **Run Content Pipeline** is voor **handmatige** acties. Het genereert alleen de bestanden, maar zet ze niet live. Dit is handig als je content wilt genereren en controleren *voordat* het gepubliceerd wordt.

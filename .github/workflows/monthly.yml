@@ -8,8 +8,8 @@ permissions:
 
 on:
   schedule:
-    # Draait om 08:00 UTC op de eerste dag van elke maand
-    - cron: '0 8 1 * *'
+    # Draait om 03:00 UTC op de eerste dag van elke maand
+    - cron: '0 3 1 * *'
   workflow_dispatch:
     inputs:
       skip_content_generation:

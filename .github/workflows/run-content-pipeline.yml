@@ -2,8 +2,10 @@ name: 3. Run Content Pipeline
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: '0 8 1 * *' # Draait om 08:00 op de eerste dag van elke maand
+
+# --- PERMISSIES VOOR DE HELE WORKFLOW ---
+permissions:
+  contents: write # Toestemming om content te committen
 
 jobs:
   run_pipeline:

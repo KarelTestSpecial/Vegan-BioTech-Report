@@ -1,4 +1,4 @@
-# src/run_pipeline.py
+# pipeline/run_pipeline.py
 
 import json
 import os
@@ -29,48 +29,73 @@ def run_command(command: list, env: dict):
         raise subprocess.CalledProcessError(process.returncode, command)
     return process
 
-def archive_old_content():
-    """Archiveert oude content-directories en data-bestanden naar een timestamped map."""
-    content_dirs_to_check = ["content/newsletters", "content/longreads", "content/posts"]
+def archive_output_files():
+    """Archiveert oude output-bestanden naar een timestamped map in de archive directory."""
+    output_dir = "output"
+    data_files = [os.path.join(output_dir, f) for f in ["raw.json", "curated.json", "longread_outline.json", "last_topics.json"]]
 
-    # Zoek naar alle timestamped subdirectories (YYYY-MM-DD_HH-MM-SS)
-    old_content_dirs = []
-    for base_dir in content_dirs_to_check:
-        if os.path.exists(base_dir):
-            # Glob op '*/' om alleen directories te vinden
-            pattern = os.path.join(base_dir, "20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]_*")
-            found_dirs = glob.glob(pattern)
-            old_content_dirs.extend(found_dirs)
+    existing_files = [f for f in data_files if os.path.exists(f)]
 
-    data_files = ["raw.json", "curated.json", "social_posts.json", "longread_outline.json", "published_post_url.txt"]
-
-    if not old_content_dirs and not any(os.path.exists(f) for f in data_files):
-        eprint("Geen bestaande content gevonden om te archiveren.")
+    if not existing_files:
+        eprint("Geen bestaande output-bestanden gevonden om te archiveren.")
         return
     
     archive_dir = "archive"
     os.makedirs(archive_dir, exist_ok=True)
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    run_archive_dir = os.path.join(archive_dir, timestamp)
+    run_archive_dir = os.path.join(archive_dir, timestamp, "output")
     os.makedirs(run_archive_dir)
     
-    # Archiveer de gevonden content directories
-    if old_content_dirs:
-        content_archive_base = os.path.join(run_archive_dir, "content")
-        os.makedirs(content_archive_base, exist_ok=True)
-        for dir_path in old_content_dirs:
-            # Bepaal de bestemming (bv. archive/ts/content/newsletters/ts_sub)
-            parent_dir_name = os.path.basename(os.path.dirname(dir_path))
-            dest_parent_dir = os.path.join(content_archive_base, parent_dir_name)
-            os.makedirs(dest_parent_dir, exist_ok=True)
-            shutil.move(dir_path, dest_parent_dir)
+    for file_path in existing_files:
+        shutil.move(file_path, run_archive_dir)
 
-    # Archiveer de hoofdniveau data bestanden
-    for file_path in data_files:
-        if os.path.exists(file_path):
-            shutil.move(file_path, run_archive_dir)
+    eprint(f"Oude output-bestanden gearchiveerd in: {run_archive_dir}")
 
-    eprint(f"Oude content gearchiveerd in: {run_archive_dir}")
+def archive_content_files(new_run_timestamp: str):
+    """Zoekt alle content van vorige runs en voegt 'archived: true' toe aan de front matter."""
+    eprint("Zoeken naar content van vorige runs om te archiveren...")
+    content_dirs = ["content/newsletters", "content/longreads"]
+    archived_count = 0
+
+    for content_dir in content_dirs:
+        if not os.path.exists(content_dir):
+            continue
+
+        for dir_name in os.listdir(content_dir):
+            if dir_name == new_run_timestamp:
+                continue # Sla de content van de HUIDIGE run over
+
+            dir_path = os.path.join(content_dir, dir_name)
+            if not os.path.isdir(dir_path):
+                continue
+
+            for filename in glob.glob(os.path.join(dir_path, "*.md")):
+                try:
+                    with open(filename, 'r+', encoding='utf-8') as f:
+                        content = f.read()
+                        if '---' in content and 'archived: true' not in content:
+                            # Zoek de positie van de tweede '---'
+                            parts = content.split('---', 2)
+                            if len(parts) >= 3:
+                                front_matter = parts[1]
+                                body = parts[2]
+                                new_front_matter = front_matter.strip() + '\narchived: true\n'
+                                new_content = f"---
+{new_front_matter}
+---
+{body}"
+                                f.seek(0)
+                                f.write(new_content)
+                                f.truncate()
+                                eprint(f"  - Gearchiveerd: {filename}")
+                                archived_count += 1
+                except Exception as e:
+                    eprint(f"  - Fout bij verwerken van {filename}: {e}")
+
+    if archived_count > 0:
+        eprint(f"✅ {archived_count} contentbestanden van vorige runs zijn gemarkeerd als gearchiveerd.")
+    else:
+        eprint("Geen nieuwe bestanden gevonden om te archiveren.")
 
 def get_provider_list():
     """Haalt de lijst van AI providers op uit providers.json."""
@@ -129,24 +154,14 @@ def run_task_with_fallback(task_name: str, task_function, providers_to_run):
     
     raise RuntimeError(f"DRAMATISCHE FOUT: Kon taak '{task_name}' met geen enkele provider voltooien.")
 
-def write_publication_url(base_url: str, longread_filename: str):
-    """Schrijft de volledige URL van de longread naar een bestand."""
-    if not base_url:
-        eprint("⚠️ WAARSCHUWING: SITE_BASE_URL is niet ingesteld. Kan geen publicatie-URL genereren.")
-        return
-
-    path = longread_filename.replace('content/', '', 1).replace('.md', '/')
-    full_url = urljoin(base_url, path)
-    
-    with open("published_post_url.txt", "w", encoding="utf-8") as f:
-        f.write(full_url)
-    eprint(f"✅ Publicatie-URL voor social media geschreven: {full_url}")
-
 def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     """De hoofd-pipeline die alle stappen voor contentgeneratie coördineert."""
     
+    run_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+
     if not no_archive:
-        archive_old_content()
+        archive_output_files()
+        archive_content_files(run_timestamp)
     else:
         eprint("Archivering overgeslagen vanwege de --no-archive vlag.")
 
@@ -160,8 +175,6 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
         eprint("❌ Geen geldige providers gevonden.")
         sys.exit(1)
 
-    run_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-
     # Maak aparte directories voor nieuwsbrieven en longreads
     newsletter_content_dir = os.path.join("content", "newsletters", run_timestamp)
     longread_content_dir = os.path.join("content", "longreads", run_timestamp)
@@ -172,27 +185,34 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
 
     enabled_langs = [lang for lang in json.load(open('languages.json')) if lang.get('enabled')]
 
+    # Definieer output bestanden
+    output_dir = "output"
+    os.makedirs(output_dir, exist_ok=True)
+    raw_json_path = os.path.join(output_dir, "raw.json")
+    curated_json_path = os.path.join(output_dir, "curated.json")
+    outline_path = os.path.join(output_dir, "longread_outline.json")
+    topics_file = os.path.join(output_dir, "last_topics.json")
+
     # Stap 1-3: Fetch, Curate, Draft (draaien nu altijd)
     eprint("\n--- Stap 1: Fetch Data ---")
-    run_task_with_fallback("Fetch Data", lambda p: run_command(["python3", "-m", "src.fetch", "--date", target_date_iso], env=build_script_env(p, None)), providers_to_run)
+    run_task_with_fallback("Fetch Data", lambda p: run_command(["python3", "-m", "pipeline.fetch", "--date", target_date_iso, "-o", raw_json_path], env=build_script_env(p, None)), providers_to_run)
 
     eprint("\n--- Stap 2: Curate Data ---")
-    run_command(["python3", "-m", "src.curate"], env=os.environ.copy())
+    run_command(["python3", "-m", "pipeline.curate", "-i", raw_json_path, "-o", curated_json_path], env=os.environ.copy())
 
     eprint("\n--- Stap 3: Draft Newsletters ---")
-    run_task_with_fallback("Draft Newsletters", lambda p: run_command(["python3", "-m", "src.draft", "--date", target_date_iso], env=build_script_env(p, newsletter_content_dir)), providers_to_run)
+    run_task_with_fallback("Draft Newsletters", lambda p: run_command(["python3", "-m", "pipeline.draft", "--date", target_date_iso, "-i", curated_json_path], env=build_script_env(p, newsletter_content_dir)), providers_to_run)
 
     # Stap 4: Genereer de Engelse outline (draait nu altijd)
     eprint("\n--- Stap 4: Generate Long-Read Outline ---")
     def task_select_and_generate_outline(provider_config):
         env = build_script_env(provider_config, None) # Geen content dir nodig voor deze stappen
         # Stap 4a: Selecteer onderwerp
-        topic_process = run_command(["python3", "-m", "src.select_topic"], env=env)
+        topic_process = run_command(["python3", "-m", "pipeline.select_topic", "-i", curated_json_path, "--history-file", topics_file], env=env)
         longread_topic = topic_process.stdout.strip()
 
         # Stap 4b: Genereer de outline
-        outline_path = "longread_outline.json"
-        run_command(["python3", "-m", "src.generate_longread_outline", longread_topic, "--outline-out", outline_path], env=env)
+        run_command(["python3", "-m", "pipeline.generate_longread_outline", longread_topic, "--outline-out", outline_path], env=env)
 
         # Stap 4c: Update de lijst met vorige onderwerpen
         try:
@@ -201,7 +221,6 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
             new_topic_title = new_outline.get('title')
 
             if new_topic_title:
-                topics_file = "last_topics.json"
                 previous_topics = []
                 try:
                     with open(topics_file, 'r', encoding='utf-8') as f:
@@ -210,7 +229,8 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
                     pass
 
                 previous_topics.append(new_topic_title)
-                previous_topics = previous_topics[-2:]
+                # Bewaar de laatste 6 onderwerpen
+                previous_topics = previous_topics[-6:]
 
                 with open(topics_file, 'w', encoding='utf-8') as f:
                     json.dump(previous_topics, f, indent=2)
@@ -231,22 +251,13 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
 
         def task_generate_article(provider_config):
             run_command([
-                "python3", "-m", "src.generate_longread",
-                "--outline-in", "longread_outline.json",
+                "python3", "-m", "pipeline.generate_longread",
+                "--outline-in", outline_path,
                 "-o", output_path,
                 "--lang-name", lang_name
             ], env=build_script_env(provider_config, None)) # Content dir niet nodig, output path is absoluut
         run_task_with_fallback(f"Generate Long-Read ({lang_name})", task_generate_article, providers_to_run)
     
-    # Stap 5.5: Schrijf publicatie-URL (van de Engelse versie)
-    eprint("\n--- Stap 5.5: Write Publication URL ---")
-    longread_filename_en = os.path.join(longread_content_dir, f"longread_{target_date_iso}_en.md")
-    write_publication_url(os.getenv("SITE_BASE_URL"), longread_filename_en)
-
-    # Stap 6: Generate Social Posts
-    eprint("\n--- Stap 6: Generate Social Posts ---")
-    run_task_with_fallback("Generate Social Posts", lambda p: run_command(["python3", "-m", "src.generate_social_posts"], env=build_script_env(p, None)), providers_to_run)
-
     eprint("\n✅ Pijplijn voor content generatie voltooid.")
 
 if __name__ == "__main__":

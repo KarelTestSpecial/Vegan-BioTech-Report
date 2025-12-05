@@ -48,11 +48,13 @@ elif API_TYPE == 'openai_compatible':
 else:
     raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}")
 
-# --- Datum Logica ---
-parser = argparse.ArgumentParser(description="Verzamel nieuws voor een specifieke datum.")
+# --- Argumenten Parser ---
+parser = argparse.ArgumentParser(description="Verzamel nieuws voor een specifieke datum en sla het op als JSON.")
 parser.add_argument('--date', type=str, help="De datum voor de nieuws-zoekopdracht in YYYY-MM-DD formaat.")
+parser.add_argument('-o', '--output', type=str, default="raw.json", help="Het pad naar het output JSON-bestand.")
 args = parser.parse_args()
 
+# --- Datum Logica ---
 run_date_iso = datetime.date.today().isoformat()
 if args.date:
     try:
@@ -81,9 +83,9 @@ for attempt in range(MAX_RETRIES):
         if json_match:
             json_string = json_match.group(0)
             data = json.loads(json_string)
-            with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+            with open(args.output, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
-            eprint(f"✅ Ruwe data succesvol verzameld en opgeslagen in {OUTPUT_FILE}.")
+            eprint(f"✅ Ruwe data succesvol verzameld en opgeslagen in {args.output}.")
             break
         else:
             raise ValueError("Geen valide JSON array gevonden in de AI-respons.")

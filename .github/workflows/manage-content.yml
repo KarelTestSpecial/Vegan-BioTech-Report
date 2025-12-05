@@ -1,0 +1,51 @@
+name: 2. Manage Content Status
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Welke actie wil je uitvoeren?'
+        required: true
+        type: choice
+        options:
+        - archive-live-content
+        - unarchive-latest-content
+        - set-specific-files-archived
+        - set-specific-files-live
+      files:
+        description: 'Optioneel: Geef de paden naar de bestanden op, gescheiden door spaties.'
+        required: false
+        type: string
+
+jobs:
+  manage_content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Run content management script
+        env:
+          FILES_INPUT: ${{ github.event.inputs.files }}
+        run: |
+          if [ "${{ github.event.inputs.action }}" == "archive-live-content" ]; then
+            python manage_content.py archive
+          elif [ "${{ github.event.inputs.action }}" == "unarchive-latest-content" ]; then
+            python manage_content.py unarchive
+          elif [ "${{ github.event.inputs.action }}" == "set-specific-files-archived" ]; then
+            python manage_content.py set-archived $FILES_INPUT
+          elif [ "${{ github.event.inputs.action }}" == "set-specific-files-live" ]; then
+            python manage_content.py set-live $FILES_INPUT
+          fi
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore(content): Update content status via GitHub Action"
+          branch: main # Of de branch waarop je wilt committen
+          commit_options: '--no-verify'

@@ -1,54 +1,30 @@
-# Environment variables
-.env
-.env.*
-!.env.example
-
-# Generated data files and content
-
-
-# Hugo / Static Site Generator
-# Ignore the build output directory
+# Hugo
 /public/
-# Ignore the resources cache
-/resources/
-# Ignore build stats
+/resources/_gen/
+/assets/js/bundle.js
+/assets/js/bundle.js.map
 hugo_stats.json
 
+# Build files
+/dist/
+/target/
+/build/
 
-# Python
-# ------
-# Virtual Environments - negeer alle veelvoorkomende namen
-env/
-venv/
-/.venv/
-ENV/
-VENV/
-.env/
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
 
-# Python cache en tijdelijke bestanden
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Egg en distributie bestanden
-.eggs/
-*.egg-info/
-dist/
-build/
-
-# IDE / Editor specific
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS specific
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# Project documentation and notes
-project_docs/
+# Our custom files
+output/
+hugo.log
+hugo_extended_*.deb

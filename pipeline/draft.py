@@ -50,9 +50,10 @@ elif API_TYPE == 'openai_compatible':
 else:
     raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}")
 
-# --- Datum Logica ---
+# --- Argumenten Parser ---
 parser = argparse.ArgumentParser(description="Genereer een nieuwsbrief voor een specifieke datum in meerdere talen.")
 parser.add_argument('--date', type=str, help="De datum voor de nieuwsbrief in YYYY-MM-DD formaat.")
+parser.add_argument('-i', '--input', type=str, required=True, help="Het pad naar het input JSON-bestand (curated.json).")
 args = parser.parse_args()
 
 target_date = datetime.date.today()
@@ -70,7 +71,7 @@ eprint(f"Nieuwsbrieven worden geschreven voor datum: {today_iso}")
 with open(PROMPT_TPL_PATH, "r", encoding="utf-8") as f:
     PROMPT_TPL = f.read()
 try:
-    with open(CURATED_DATA_PATH, "r", encoding="utf-8") as f:
+    with open(args.input, "r", encoding="utf-8") as f:
         news_data = json.load(f)
     with open(LANGUAGES_CONFIG_PATH, "r", encoding="utf-8") as f:
         all_languages = json.load(f)

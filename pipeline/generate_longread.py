@@ -94,6 +94,14 @@ def generate_longread_article(outline_path: str, output_path: str, lang_name: st
     if heading_pos > 0:
         content = content[heading_pos:]
     cleaned_markdown = content
+
+    # Voeg de <!--more--> tag toe voor de eerste H2 heading
+    h2_pattern = re.compile(r'^\s*## ', re.MULTILINE)
+    match = h2_pattern.search(cleaned_markdown)
+    if match:
+        insertion_point = match.start()
+        cleaned_markdown = cleaned_markdown[:insertion_point] + '<!--more-->\n\n' + cleaned_markdown[insertion_point:]
+        eprint("✓ <!--more--> tag succesvol ingevoegd.")
     
     # Pak de titel uit de opgeschoonde content
     lines = cleaned_markdown.splitlines()

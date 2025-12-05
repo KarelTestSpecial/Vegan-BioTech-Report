@@ -155,6 +155,9 @@ description: "{first_paragraph}"
         # Gebruik de opgeschoonde markdown voor de body
         full_content = front_matter + clean_md
 
+        # Voeg de <!--more--> tag toe aan het einde van de content
+        full_content += "\n<!--more-->\n"
+
         output_filename = f"{OUTPUT_DIR}/{target_date.strftime('%Y-%m-%d')}_{lang_code}.md"
         with open(output_filename, "w", encoding="utf-8") as f:
             f.write(full_content)

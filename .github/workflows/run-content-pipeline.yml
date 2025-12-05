@@ -22,11 +22,9 @@ jobs:
 
       - name: Run content generation pipeline
         env:
-          AI_API_TYPE: ${{ secrets.AI_API_TYPE }}
-          AI_MODEL_ID: ${{ secrets.AI_MODEL_ID }}
-          AI_API_KEY_OPENAI: ${{ secrets.AI_API_KEY_OPENAI }}
-          AI_API_KEY_GOOGLE: ${{ secrets.AI_API_KEY_GOOGLE }}
-          # Voeg hier eventuele andere secrets toe die de pipeline nodig heeft
+          # De namen van de secrets moeten overeenkomen met de 'api_key_name' in providers.json
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python -m pipeline.run_pipeline
 
       - name: Commit and push changes

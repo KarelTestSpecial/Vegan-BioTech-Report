@@ -1,4 +1,4 @@
-name: 3. Run Content Pipeline
+name: 5. [DEBUG] Run Pipeline Only
 
 on:
   workflow_dispatch:

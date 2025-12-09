@@ -1,4 +1,4 @@
-name: 2. Manage Content Status
+name: 3. [UTIL] Manage Content
 
 on:
   workflow_dispatch:

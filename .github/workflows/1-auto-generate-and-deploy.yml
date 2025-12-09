@@ -1,4 +1,4 @@
-name: Monthly Content Generation and Deploy
+name: 1. [AUTO] Generate Content & Deploy
 
 # --- PERMISSIES VOOR DE HELE WORKFLOW ---
 permissions:

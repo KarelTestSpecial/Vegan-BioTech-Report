@@ -1,4 +1,4 @@
-name: 1. Show Content Status
+name: 4. [UTIL] View Content Status
 
 on:
   workflow_dispatch:

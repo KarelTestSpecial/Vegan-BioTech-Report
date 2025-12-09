@@ -1,4 +1,4 @@
-name: Deploy Hugo Site to Pages
+name: 2. [MANUAL] Deploy Site Only
 
 on:
   push:

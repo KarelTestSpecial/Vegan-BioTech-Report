@@ -40,6 +40,10 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python3 -m pipeline.run_pipeline
+      - name: Generate Images with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: python3 generate_images.py
       - name: Commit and Push Generated Content
         run: |
           git config user.name "GitHub Actions Bot"

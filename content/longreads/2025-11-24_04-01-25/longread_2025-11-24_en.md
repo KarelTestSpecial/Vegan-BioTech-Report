@@ -1,6 +1,7 @@
 ---
 title: "Food From Thin Air: Can Air-Based Protein Revolutionize Our Plates?"
 date: 2025-11-24
+featured_image: "/images/air_protein.png"
 ---
 
 # Food From Thin Air: Can Air-Based Protein Revolutionize Our Plates?

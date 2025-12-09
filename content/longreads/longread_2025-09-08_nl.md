@@ -1,6 +1,7 @@
 ---
 title: "Myceliumleer: De Toekomst van Duurzame Mode"
 date: 2025-09-08
+featured_image: "/images/mycelium_leather.png"
 ---
 
 # Myceliumleer: De Toekomst van Duurzame Mode

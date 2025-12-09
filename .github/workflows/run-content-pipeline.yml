@@ -29,6 +29,11 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python -m pipeline.run_pipeline
 
+      - name: Generate images for new content
+        env:
+          GEMINI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: python generate_images.py
+
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:

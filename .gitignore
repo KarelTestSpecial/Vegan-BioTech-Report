@@ -28,3 +28,12 @@ Thumbs.db
 output/
 hugo.log
 hugo_extended_*.deb
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+.venv/
+env/

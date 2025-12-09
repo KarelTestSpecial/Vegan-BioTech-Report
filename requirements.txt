@@ -27,4 +27,7 @@ python-dotenv
 
 # Social Media APIs
 Mastodon.py
-praw
+
+# Image Generation & Frontmatter
+python-frontmatter
+Pillow

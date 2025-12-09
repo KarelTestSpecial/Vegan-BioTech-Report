@@ -1,29 +1,29 @@
 [
   {
-    "id": "gemini",
+    "id": "gemini-1.5-flash",
     "api_type": "google",
-    "model_id": "gemini-2.0-flash",
+    "model_id": "gemini-1.5-flash",
     "api_key_name": "GOOGLE_API_KEY",
     "base_url": null
   },
   {
-    "id": "kimi",
+    "id": "llama-3.1-8b",
     "api_type": "openai_compatible",
-    "model_id": "moonshotai/kimi-k2:free",
+    "model_id": "meta-llama/llama-3.1-8b-instruct:free",
     "api_key_name": "OPENROUTER_API_KEY",
     "base_url": "https://openrouter.ai/api/v1"
   },
   {
-    "id": "mistral",
+    "id": "gemini-2.0-flash-exp",
     "api_type": "openai_compatible",
-    "model_id": "mistralai/mistral-7b-instruct",
+    "model_id": "google/gemini-2.0-flash-exp:free",
     "api_key_name": "OPENROUTER_API_KEY",
     "base_url": "https://openrouter.ai/api/v1"
   },
   {
-    "id": "nous-hermes",
+    "id": "mistral-nemo",
     "api_type": "openai_compatible",
-    "model_id": "nousresearch/nous-hermes-2-mixtral-8x7b-dpo",
+    "model_id": "mistralai/mistral-nemo:free",
     "api_key_name": "OPENROUTER_API_KEY",
     "base_url": "https://openrouter.ai/api/v1"
   }

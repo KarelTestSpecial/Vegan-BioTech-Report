@@ -21,6 +21,8 @@ else:
 # In de API heet dit 'gemini-2.5-flash-image' maar gedraagt zich als image model
 MODEL_NAME = 'gemini-2.5-flash-image'
 
+print(f"GenAI Library Version: {genai.__version__}")
+
 os.makedirs(STATIC_IMG_DIR, exist_ok=True)
 
 def generate_image_prompt(article_text): 

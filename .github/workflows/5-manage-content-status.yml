@@ -17,6 +17,9 @@ on:
         required: false
         type: string
 
+permissions:
+  contents: write
+
 jobs:
   manage_content:
     runs-on: ubuntu-latest

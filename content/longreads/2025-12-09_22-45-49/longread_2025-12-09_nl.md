@@ -1,5 +1,5 @@
 ---
-title: "**De Kracht van het Mindset: Hoe Je Denkwijze Je Leven Verbetert**"
+title: "De Kracht van het Mindset: Hoe Je Denkwijze Je Leven Verbetert"
 date: 2025-12-09
 ---
 

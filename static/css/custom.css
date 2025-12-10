@@ -10,8 +10,10 @@
     background-color: rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Optioneel: Als je ook de tekstschaduw wilt versterken voor leesbaarheid */
-h1,
-h2 {
+/* Scoped text shadow: Hero section & Navigation only */
+.cover h1,
+.cover h2,
+nav,
+nav a {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }

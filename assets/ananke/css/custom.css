@@ -1,0 +1,17 @@
+/* 
+   Overschrijf de donkere filter van Ananke.
+   Standaard is het rgba(0, 0, 0, 0.6) -> 60% zwart.
+   Wij maken er 0.3 (30%) of 0.2 (20%) van.
+*/
+
+.bg-black-60,
+.bg-black-50,
+.bg-black-40 {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Optioneel: Als je ook de tekstschaduw wilt versterken voor leesbaarheid */
+h1,
+h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}

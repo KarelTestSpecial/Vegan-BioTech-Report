@@ -9,6 +9,7 @@ summaryLength = 50
   
 [params]
   mainSections = ["longreads", "newsletters"]
+  custom_css = ["css/custom.css"]
   
 [outputs]
   home = ["HTML", "RSS"]

@@ -23,12 +23,14 @@
       {{ end }}
       {{ partials.IncludeCached "social/follow.html" . }}
         
-      {{/* Language Selector */}}
-      <select id="language-select-nav" class="ba b--black-20 pa2 mr3">
-        <option value="all">All languages</option>
-        <option value="en">English</option>
-        <option value="nl">Nederlands</option>
-      </select>
+      {{/* Language Selector: Text Links */}}
+      <div id="language-switcher" class="pl3 f6 ttu tracked">
+        <a href="#" class="lang-opt link white-90 fw6 dib mr1" data-value="all">All</a>
+        <span class="white-40">/</span>
+        <a href="#" class="lang-opt link white-50 fw3 dib mh1" data-value="en">EN</a>
+        <span class="white-40">/</span>
+        <a href="#" class="lang-opt link white-50 fw3 dib mh1" data-value="nl">NL</a>
+      </div>
 
     </div>
   </div>

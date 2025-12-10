@@ -27,7 +27,7 @@ jobs:
           # De namen van de secrets moeten overeenkomen met de 'api_key_name' in providers.json
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: python -m pipeline.run_pipeline
+        run: python3 pipeline/run_pipeline
 
       - name: Generate images for new content
         env:

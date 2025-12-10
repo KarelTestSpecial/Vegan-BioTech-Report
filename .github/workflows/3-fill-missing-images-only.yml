@@ -24,7 +24,7 @@ jobs:
       - name: Generate Missing Images
         env:
           GEMINI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: python3 -m pipeline.generate_images
+        run: python3 pipeline/generate_images
 
       - name: Commit and Push Generated Images
         run: |

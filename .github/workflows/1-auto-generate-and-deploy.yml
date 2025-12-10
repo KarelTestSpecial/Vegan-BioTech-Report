@@ -36,14 +36,14 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run Content Generation Pipeline
         env:
-          SITE_BASE_URL: "https://profdrkdc.github.io/Vegan-BioTech-Report/"
+          SITE_BASE_URL: "https://kareltestspecial.github.io/Vegan-BioTech-Report/"
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: python3 -m pipeline.run_pipeline
+        run: python3 pipeline/run_pipeline.py
       - name: Generate Images with Gemini
         env:
           GEMINI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: python3 -m pipeline.generate_images
+        run: python3 pipeline/generate_images.py
       - name: Commit and Push Generated Content
         run: |
           git config user.name "GitHub Actions Bot"

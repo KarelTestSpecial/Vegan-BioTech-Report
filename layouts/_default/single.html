@@ -8,6 +8,19 @@
   {{ $section := .Site.GetPage "section" .Section }}
   <article class="flex-l mw8 center ph3 flex-wrap justify-between">
     <header class="mt4 w-100">
+      {{/* Top Navigation Arrows - NEW POSITION AND STYLE */}}
+      <div class="flex justify-between items-center mb4">
+        {{ with .PrevInSection }}
+          <a class="f1 link dim mid-gray" href="{{ .RelPermalink }}" title="Previous: {{ .Title }}">&laquo;</a>
+        {{ else }}
+          <div></div> {{/* Empty div to keep flex layout */}}
+        {{ end }}
+        {{ with .NextInSection }}
+          <a class="f1 link dim mid-gray" href="{{ .RelPermalink }}" title="Next: {{ .Title }}">&raquo;</a>
+        {{ else }}
+          <div></div> {{/* Empty div to keep flex layout */}}
+        {{ end }}
+      </div>
       <aside class="instapaper_ignoref b helvetica tracked ttu">
           {{/*
           CurrentSection allows us to use the section title instead of inferring from the folder.
@@ -51,20 +64,6 @@
       {{ end }}
     </header>
     <div class="nested-copy-line-height lh-copy {{ $.Param "post_content_classes"  | compare.Default "serif"}} f4 nested-links {{ $.Param "text_color" | compare.Default "mid-gray" }} {{ compare.Conditional (compare.Eq $.Site.Language.LanguageDirection "rtl") "pl4-l" "pr4-l" }} w-two-thirds-l">
-      {{/* Top Navigation Arrows */}}
-      <div class="flex justify-between items-center mb4">
-        {{ with .PrevInSection }}
-          <a class="f4 link dim mid-gray" href="{{ .RelPermalink }}" title="Previous: {{ .Title }}">←</a>
-        {{ else }}
-          <div></div> {{/* Empty div to keep flex layout */}}
-        {{ end }}
-        {{ with .NextInSection }}
-          <a class="f4 link dim mid-gray" href="{{ .RelPermalink }}" title="Next: {{ .Title }}">→</a>
-        {{ else }}
-          <div></div> {{/* Empty div to keep flex layout */}}
-        {{ end }}
-      </div>
-
       {{- .Content -}}
       {{- partials.Include "tags.html" . -}}
 

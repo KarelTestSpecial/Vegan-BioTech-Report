@@ -30,7 +30,7 @@ def generate_image_prompt(article_text):
     You are an AI art director. Read this summary and write ONE single, descriptive English prompt 
     to generate a cover image.
     
-    Style: Photorealistic, cinematic lighting, 8k, highly detailed, cyberpunk or futuristic biotechnology elements.
+    Style: Photorealistic, cinematic lighting, 8k, highly detailed, positive, optimistic, clean, innovative, hopeful, cyberpunk or futuristic biotechnology elements.
     Subject: {article_text[:1000]}
     
     Return ONLY the prompt.
@@ -40,7 +40,7 @@ def generate_image_prompt(article_text):
         return response.text.strip()
     except Exception as e:
         print(f"⚠️ Text Gen Error: {e}")
-        return "Futuristic biotechnology laboratory with green plants, cinematic lighting, 8k, photorealistic"
+        return "Bright, optimistic futuristic biotechnology laboratory with vibrant green plants and clean, innovative technology, cinematic lighting, 8k, photorealistic"
 
 def create_image_pollinations(prompt, filename):
     """

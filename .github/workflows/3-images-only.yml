@@ -1,4 +1,4 @@
-name: 3. [MANUAL] Fill Missing Images Only
+name: 3. [MANUAL] Images Only
 
 on:
   workflow_dispatch:

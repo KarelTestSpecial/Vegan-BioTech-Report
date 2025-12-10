@@ -42,10 +42,12 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python3 pipeline/run_pipeline.py
-      - name: Generate Images with Gemini
+      - name: Run Content Generation Pipeline
         env:
-          GEMINI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: python pipeline/generate_images.py
+          SITE_BASE_URL: "https://kareltestspecial.github.io/Vegan-BioTech-Report/"
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: python3 pipeline/run_pipeline.py
       - name: Commit and Push Generated Content
         run: |
           git config user.name "GitHub Actions Bot"
@@ -55,6 +57,10 @@ jobs:
             git commit -m "feat(content): Add generated content from workflow run"
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
           fi
+      - name: Generate Images with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: python pipeline/generate_images.py
 
   # JOB 2: Build en deploy
   build-and-deploy:

@@ -52,7 +52,7 @@ def create_image_pollinations(prompt, filename):
     url = f"https://image.pollinations.ai/prompt/{safe_prompt}?model=flux&width=1280&height=720&nologo=true"
     
     try:
-        response = requests.get(url, timeout=60)
+        response = requests.get(url, timeout=30)
         if response.status_code == 200:
             path = os.path.join(STATIC_IMG_DIR, filename)
             with open(path, 'wb') as f:

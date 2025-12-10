@@ -1,4 +1,4 @@
-name: 2. [MANUAL] Pipeline Only
+name: 2. [MANUAL] Generate Content without Hugo Build or Deployment
 
 on:
   workflow_dispatch:

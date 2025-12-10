@@ -4,15 +4,7 @@
       {{- .Content -}}
     </section>
 
-    {{/* Language Filter Controls */}}
-    <div class="tc mb4">
-      <label for="language-select" class="f6 b db mb2">Select Language / Kies Taal</label>
-      <select id="language-select" class="ba b--black-20 pa2 mb2 db center">
-        <option value="all">All / Alles</option>
-        <option value="en">English</option>
-        <option value="nl">Nederlands</option>
-      </select>
-    </div>
+    {{/* Language Filter Controls are now in site-navigation.html */}}
 
     {{/* Verzamel en groepeer de live pagina's één keer */}}
     {{ $livePages := where .Site.RegularPages "Params.archived" "ne" true }}
@@ -57,7 +49,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const selector = document.getElementById('language-select');
+      const selector = document.getElementById('language-select-nav');
       const articles = document.querySelectorAll('.article-item');
 
       // Function to update visibility

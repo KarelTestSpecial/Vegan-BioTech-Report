@@ -160,8 +160,8 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     eprint("\n--- Stap 3: Draft Newsletters ---")
     run_task_with_fallback("Draft Newsletters", lambda p: run_command(["python3", "-m", "pipeline.draft", "--date", target_date_iso, "-i", curated_json_path], env=build_script_env(p, newsletter_content_dir)), providers_to_run)
 
-    eprint("💤 Even 30 seconden pauze na het zware schrijfwerk...")
-    time.sleep(30)
+    eprint("💤 Even 10 seconden pauze na het zware schrijfwerk...")
+    time.sleep(10)
 
     # Stap 4: Genereer de Engelse outline (draait nu altijd)
     eprint("\n--- Stap 4: Generate Long-Read Outline ---")

@@ -1,5 +1,6 @@
 ---
-title: "About the Vegan BioTech Report"
+featured_image: /images/about.png
+title: About the Vegan BioTech Report
 ---
 
 Welcome to the Vegan BioTech Report.

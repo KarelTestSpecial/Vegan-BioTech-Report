@@ -1,6 +1,7 @@
 ---
-title: "Unlocking the Power of Mindfulness: A Journey to Inner Peace"
 date: 2025-12-09
+featured_image: /images/longread_2025-12-09_en.png
+title: 'Unlocking the Power of Mindfulness: A Journey to Inner Peace'
 ---
 
 # Unlocking the Power of Mindfulness: A Journey to Inner Peace

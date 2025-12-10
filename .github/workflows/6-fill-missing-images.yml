@@ -1,0 +1,39 @@
+name: 6. [MANUAL] Fill Missing Images
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fill-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate Missing Images
+        env:
+          GEMINI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: python3 -m pipeline.generate_images
+
+      - name: Commit and Push Generated Images
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add content static/images
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(images): Generate missing images from workflow run"
+            git push
+          else
+            echo "No changes to commit."
+          fi

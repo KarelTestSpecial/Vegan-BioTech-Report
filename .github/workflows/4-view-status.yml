@@ -16,4 +16,4 @@ jobs:
           python-version: '3.11'
 
       - name: Run status command
-        run: python manage_content.py status
+        run: python3 -m pipeline.manage_content status

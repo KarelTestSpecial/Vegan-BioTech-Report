@@ -8,7 +8,7 @@ from urllib.parse import quote
 # --- CONFIGURATIE ---
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 CONTENT_DIR = "content" # Zoekt in alle submappen (newsletters, longreads, etc.)
-STATIC_IMG_DIR = "static/images/generated"
+STATIC_IMG_DIR = "static/images"
 
 # Installeer Google
 if GEMINI_API_KEY:
@@ -85,7 +85,7 @@ def process_files():
                         
                         if create_image_pollinations(image_prompt, img_filename):
                             # AANGEPAST: Schrijft naar featured_image
-                            post['featured_image'] = f"/images/generated/{img_filename}"
+                            post['featured_image'] = f"/images/{img_filename}"
                             
                             with open(file_path, 'wb') as f:
                                 frontmatter.dump(post, f)

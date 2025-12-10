@@ -7,54 +7,49 @@ Dit document beschrijft de analyse van de codebase en de processen van de Vegan 
 ### a. Mappenstructuur en Bestandsorganisatie
 
 -   **`content/`**: Bevat de Hugo content, opgesplitst in `newsletters`, `longreads`, en `posts`. Nieuwe content wordt programmatisch aangemaakt in submappen met een tijdstempel (bv. `content/newsletters/2025-11-24_04-01-25/`).
--   **`src/`**: Bevat alle Python scripts die de content generatie pijplijn vormen. Dit is het hart van de automatisering.
--   **`archive/`**: Bevat gearchiveerde content. De `run_pipeline.py` verplaatst oudere content van `content/` naar een nieuwe submap met tijdstempel in `archive/`. Dit is de reden waarom oudere content niet op de live site verschijnt: Hugo verwerkt alleen bestanden binnen de `content/` map.
--   **`themes/ananke/`**: De Hugo-thema dat het uiterlijk van de site bepaalt. Aanpassingen aan de layout en het design moeten hier gebeuren.
--   **`layouts/`**: Bevat overschrijvingen of toevoegingen aan het Ananke-thema. Momenteel bevat het een `_default/baseof.html` en een `partials/summary.html`, wat wijst op maatwerk.
--   **`hugo.toml`**: Het hoofdconfiguratiebestand voor de Hugo-site. Bepaalt de titel, het thema, de menu's en welke secties als "main" worden beschouwd.
--   **`run_pipeline.py`**: Het centrale script dat het hele contentgeneratieproces orkestreert, van data ophalen tot social media posts genereren.
+-   **`pipeline/`**: Bevat alle Python scripts die de content generatie en beheer verzorgen.
+    - `run_pipeline.py`: Hoofdscript voor content creatie.
+    - `generate_images.py`: Script voor AI afbeelding generatie.
+    - `manage_content.py`: Script voor content beheer (archive/publish).
+    - En diverse helper scripts (`fetch.py`, `curate.py`, etc.).
+-   **`themes/ananke/`**: De Hugo-themamodule (Ananke).
+-   **`layouts/`**: Bevat overschrijvingen op het thema (`index.html` voor homepage logica).
+-   **`static/`**: Statische assets.
+    - `css/custom.css`: Eigen CSS aanpassingen (tekstschaduw, filters).
+    - `images/`: Gegenereerde en statische afbeeldingen.
+-   **`.github/workflows/`**: GitHub Actions workflows voor automatisering.
 
-### b. Content Generatie Pijplijn (run_pipeline.py)
+### b. Content Generatie Pijplijn (pipeline/run_pipeline.py)
 
-Het proces is volledig geautomatiseerd via Python scripts en wordt als volgt uitgevoerd:
+Het proces is volledig geautomatiseerd en kan zowel lokaal als via GitHub Actions worden gestart:
 
-1.  **Archivering**: `archive_old_content()` verplaatst de inhoud van de vorige run uit de `content` map naar de `archive` map.
-2.  **Setup**: Maakt nieuwe mappen met tijdstempels aan in `content/newsletters` en `content/longreads` voor de huidige run.
-3.  **Data Fetching**: `fetch.py` haalt ruwe data op.
-4.  **Curatie**: `curate.py` verwerkt de ruwe data naar een `curated.json` bestand.
-5.  **Drafting**: `draft.py` genereert nieuwsbrieven op basis van de gecureerde data.
-6.  **Topic Selectie**: `select_topic.py` kiest een onderwerp voor de longread, waarbij `last_topics.json` wordt gebruikt om herhaling te voorkomen.
-7.  **Outline Generatie**: `generate_longread_outline.py` maakt een outline voor de longread.
-8.  **Longread Generatie**: `generate_longread.py` schrijft het volledige artikel in meerdere talen.
-9.  **Social Media Posts**: `generate_social_posts.py` maakt posts voor sociale media.
+1.  **Archivering**: Oude content wordt indien nodig gearchiveerd (via `manage_content.py` logica).
+2.  **Generatie**:
+    - Data ophalen & cureren (`fetch.py`, `curate.py`).
+    - Nieuwsbrieven & Artikelen schrijven (`draft.py`, `generate_longread.py`).
+    - Afbeeldingen genereren (`generate_images.py`).
+3.  **Deployment**: Hugo bouwt de site en pusht naar `gh-pages`.
 
-Dit proces is ontworpen om één volledige "run" aan content te genereren.
+## 2. Workflows (GitHub Actions)
 
-## 2. Antwoorden op de Kernvragen (Initiële Analyse)
+Er zijn 6 gedefinieerde workflows voor beheer:
 
--   **(2) Nettere repo**: De repo kan netter door de Python-scripts, configuratiebestanden en de Hugo-site duidelijker van elkaar te scheiden. Een `scripts` of `pipeline` map in plaats van `src` zou duidelijker kunnen zijn. De output-bestanden (`raw.json`, `curated.json`, etc.) zouden in een `output` of `build` map kunnen staan die in `.gitignore` staat.
--   **(3) Maandelijkse contentcreatie**: Het `run_pipeline.py` script is de sleutel. Dit script moet zo aangepast of aangeroepen worden dat het slechts één keer per maand draait. Dit is een proces/workflow vraag (bv. via een cron job of GitHub Action) en geen code-aanpassing in de pijplijn zelf.
--   **(4) Voorkomen van herhaling**: Het script `select_topic.py` leest een `last_topics.json` bestand waarin de titels van de laatste twee longreads worden bijgehouden. De AI wordt geïnstrueerd om een ander onderwerp te kiezen. Dit is een eenvoudig maar effectief mechanisme.
--   **(5 & 6) Controle en locatie van content**: Nieuwe content staat in `content/` in een map met een tijdstempel. Oude content wordt verplaatst naar `archive/`. De **enige** content die live op de site staat, is de content die op dat moment in `content/` staat. Controle uitoefenen betekent dus bepalen welke bestanden in de `content` map blijven staan wanneer Hugo de site bouwt.
--   **(7) Controle over preview-lengte**: De lengte van de samenvattingen op de homepage wordt waarschijnlijk bepaald door `layouts/partials/summary.html` of `themes/ananke/layouts/partials/summary.html`. Hugo's `.Summary` functie wordt hier gebruikt. De lengte kan aangepast worden door de configuratie (`summaryLength` in `hugo.toml`) of door het template aan te passen om expliciet te 'truncaten'.
--   **(8) Uiterlijk**: Het uiterlijk wordt volledig beheerd door het Ananke-thema (`themes/ananke`). Verbeteringen kunnen worden doorgevoerd door de CSS van het thema aan te passen, of door een compleet nieuw thema te kiezen en te configureren.
--   **(9) Volledige archief aanbieden**: Hugo toont het archief niet omdat de bestanden fysiek uit de `content` map worden verplaatst. Om het hele archief te tonen, moet de workflow worden aangepast. In plaats van bestanden te verplaatsen, zouden we een `status` (bv. `published`, `archived`) in de front matter van de markdown-bestanden kunnen gebruiken. Zo blijven alle bestanden in de `content` map en kan Hugo ze allemaal verwerken. We kunnen dan archiefpagina's maken die filteren op deze status.
+1.  **[AUTO] Generate Content & Deploy**: Volledige cyclus: genereren, afbeeldingen maken, deployen.
+2.  **[MANUAL] Run Pipeline Only**: Draait alleen de generatie scripts (geen deploy).
+3.  **[MANUAL] Fill Missing Images Only**: Scant content op ontbrekende afbeeldingen en genereert deze (zonder tekst te herschrijven).
+4.  **[MANUAL] Deploy Site Only**: Bouwt en publiceert de huidige staat van de `main` branch.
+5.  **[UTIL] Manage Content Status**: Tools om content te archiveren (`published` -> `archived`) of weer live te zetten.
+6.  **[UTIL] View Content Status**: Rapporteert welke content live en welke gearchiveerd is.
 
-## 3. Strategie
+## 3. Strategie & Status
 
-De volgende stappen zijn nodig om de wensen van de gebruiker te realiseren:
+### Gerealiseerde Verbeteringen
+-   **Refactoring**: Scripts verplaatst van root/src naar `pipeline/` voor overzicht.
+-   **Pipeline Modules**: Scripts draaien nu als Python modules (`python -m pipeline.screen_name`) voor betrouwbare imports.
+-   **Image Management**: Afbeeldingen worden centraal in `static/images/` opgeslagen.
+-   **CSS Styling**: `custom.css` zorgt voor leesbaarheid (tekstschaduw op heros/navigatie) zonder de rest van de site te storen.
+-   **Frontmatter Beheer**: `manage_content.py` maakt gebruik van frontmatter status (`archived: true`) in plaats van bestanden fysiek te verplaatsen, waardoor Hugo meer controle heeft.
 
-1.  **Rapportage**: Schrijf een gedetailleerde analyse op basis van bovenstaande punten en sla dit op als `analyse_rapport.md`.
-2.  **Refactoring & Organisatie**:
-    -   Hernoem `src` naar `pipeline`.
-    -   Maak een `.gitignore` om output-bestanden (`*.json`, `*.txt`) te negeren.
-    -   Pas `run_pipeline.py` aan om output in een `output/` map te schrijven.
-3.  **Content Workflow Aanpassen**:
-    -   Pas de pijplijn aan: in plaats van bestanden te verplaatsen naar `archive/`, voeg een `status: published` of `status: archived` toe aan de front matter van de content-bestanden. Oudere content krijgt de status `archived`.
-    -   Pas de Hugo templates aan:
-        -   De homepage (`index.html`) toont alleen content met `status: published`.
-        -   Maak een nieuwe archiefpagina (`/archive/`) die alle content toont, of filtert op `status: archived`.
-4.  **Design & Layout**:
-    -   Analyseer de CSS van het Ananke-thema en identificeer mogelijkheden voor verbetering.
-    -   Implementeer aanpassingen aan de preview-lengte in de `summary.html` partial.
-5.  **Handleiding**: Schrijf een uitgebreide handleiding (`handleiding.md`) die alle nieuwe processen en workflows uitlegt voor de contentmanager.
+### Openstaande Punten
+-   Verdere optimalisatie van prompts in `prompts/` map.
+-   Eventuele uitbreiding van archief-pagina functionaliteit in Hugo templates.

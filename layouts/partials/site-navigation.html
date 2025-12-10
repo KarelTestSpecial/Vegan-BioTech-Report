@@ -8,13 +8,7 @@
       {{ end }}
     </a>
     <div class="flex-l items-center">
-      {{/* Language Selector */}}
-      <select id="language-select-nav" class="ba b--black-20 pa2 mr3">
-        <option value="all">All languages</option>
-        <option value="en">English</option>
-        <option value="nl">Nederlands</option>
-      </select>
-
+        
       {{ partials.Include "i18nlist.html" . }}
       {{ if .Site.Menus.main }}
         <ul class="{{ compare.Conditional (compare.Eq $.Site.Language.LanguageDirection "rtl") "pr0 ml3" "pl0 mr3" }}">
@@ -28,6 +22,14 @@
         </ul>
       {{ end }}
       {{ partials.IncludeCached "social/follow.html" . }}
+        
+      {{/* Language Selector */}}
+      <select id="language-select-nav" class="ba b--black-20 pa2 mr3">
+        <option value="all">All languages</option>
+        <option value="en">English</option>
+        <option value="nl">Nederlands</option>
+      </select>
+
     </div>
   </div>
 </nav>

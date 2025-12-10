@@ -1,7 +1,8 @@
 ---
-title: "Precisie Fermentatie: De Toekomst van Voeding Zonder Dieren?"
 date: 2025-12-05
-featured_image: "/images/precision_fermentation.png"
+featured_image: /images/precision_fermentation.png
+language: nl
+title: 'Precisie Fermentatie: De Toekomst van Voeding Zonder Dieren?'
 ---
 
 # Precisie Fermentatie: De Toekomst van Voeding Zonder Dieren?

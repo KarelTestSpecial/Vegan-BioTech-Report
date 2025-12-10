@@ -4,6 +4,16 @@
       {{- .Content -}}
     </section>
 
+    {{/* Language Filter Controls */}}
+    <div class="tc mb4">
+      <label for="language-select" class="f6 b db mb2">Select Language / Kies Taal</label>
+      <select id="language-select" class="ba b--black-20 pa2 mb2 db center">
+        <option value="all">All / Alles</option>
+        <option value="en">English</option>
+        <option value="nl">Nederlands</option>
+      </select>
+    </div>
+
     {{/* Verzamel en groepeer de live pagina's één keer */}}
     {{ $livePages := where .Site.RegularPages "Params.archived" "ne" true }}
     {{ $groupedPages := $livePages.GroupBy "Section" }}
@@ -21,7 +31,10 @@
               <h2 class="f2">{{ .Key | humanize | title }}</h2>
             </div>
             {{ range .Pages.ByDate.Reverse }}
-              <div class="relative w-100 w-30-l mb4 bg-white">
+              {{/* Determine language from frontmatter param */}}
+              {{ $lang := default "unknown" .Params.language }}
+
+              <div class="relative w-100 w-30-l mb4 bg-white article-item" data-language="{{ $lang }}">
                 <div class="bg-white mb3 pa4 gray overflow-hidden">
                   {{ with .CurrentSection.Title }}<span class="f6 db">{{ . }}</span>{{ end }}
                   <h1 class="f3 near-black">
@@ -41,4 +54,39 @@
       {{ end }}
     {{ end }}
   </article>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const selector = document.getElementById('language-select');
+      const articles = document.querySelectorAll('.article-item');
+
+      // Function to update visibility
+      function updateVisibility() {
+        const selectedLang = selector.value;
+        
+        articles.forEach(article => {
+          const articleLang = article.getAttribute('data-language');
+          
+          // Use 'flex' for visibility if it's a flex item, otherwise 'block'
+          // We assume 'w-100 w-30-l mb4' means it's a flex item, so setting display to ''
+          // will default to whatever CSS determines (likely flex).
+          if (selectedLang === 'all') {
+             article.style.display = ''; 
+          } else {
+             if (articleLang === selectedLang) {
+               article.style.display = '';
+             } else {
+               article.style.display = 'none';
+             }
+          }
+        });
+      }
+
+      // Initial check (in case browser cached the selection)
+      updateVisibility();
+
+      // Listen for changes
+      selector.addEventListener('change', updateVisibility);
+    });
+  </script>
 {{ end }}

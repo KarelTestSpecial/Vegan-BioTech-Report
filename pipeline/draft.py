@@ -148,6 +148,7 @@ for lang_config in active_languages:
 title: "{safe_title}"
 date: {article_date}
 description: "{first_paragraph}"
+language: {lang_code}
 ---
 
 """

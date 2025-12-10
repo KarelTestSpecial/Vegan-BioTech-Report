@@ -13,7 +13,7 @@ from pipeline.models import ArticleOutline
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
-def generate_longread_article(outline_path: str, output_path: str, lang_name: str):
+def generate_longread_article(outline_path: str, output_path: str, lang_name: str, lang_code: str):
     eprint(f"AI pipeline started for language: {lang_name}...")
     API_TYPE = os.getenv('AI_API_TYPE')
     MODEL_ID = os.getenv('AI_MODEL_ID')
@@ -121,6 +121,7 @@ def generate_longread_article(outline_path: str, output_path: str, lang_name: st
     front_matter = f"""---
 title: "{safe_title}"
 date: {article_date}
+language: {lang_code}
 ---
 
 """
@@ -137,7 +138,8 @@ if __name__ == "__main__":
     parser.add_argument("--outline-in", type=str, required=True, help="The path to the input JSON outline.")
     parser.add_argument("-o", "--output", type=str, required=True, help="The path to the output Markdown file.")
     parser.add_argument("--lang-name", required=True, type=str, help="The full name of the target language (e.g., 'Nederlands').")
+    parser.add_argument("--lang-code", required=True, type=str, help="The code of the target language (e.g., 'en', 'nl').")
     
     args = parser.parse_args()
     
-    generate_longread_article(args.outline_in, args.output, args.lang_name)
+    generate_longread_article(args.outline_in, args.output, args.lang_name, args.lang_code)

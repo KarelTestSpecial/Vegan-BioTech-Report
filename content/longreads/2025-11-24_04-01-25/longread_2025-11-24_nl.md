@@ -1,7 +1,8 @@
 ---
-title: "Eiwit uit de Lucht: De Belofte van Solein en de Voedselvoorziening van Morgen"
 date: 2025-11-24
-featured_image: "/images/air_protein.png"
+featured_image: /images/air_protein.png
+language: nl
+title: 'Eiwit uit de Lucht: De Belofte van Solein en de Voedselvoorziening van Morgen'
 ---
 
 # Eiwit uit de Lucht: De Belofte van Solein en de Voedselvoorziening van Morgen

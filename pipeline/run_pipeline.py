@@ -217,7 +217,8 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
                 "python3", "-m", "pipeline.generate_longread",
                 "--outline-in", outline_path,
                 "-o", output_path,
-                "--lang-name", lang_name
+                "--lang-name", lang_name,
+                "--lang-code", lang_code
             ], env=build_script_env(provider_config, None)) # Content dir niet nodig, output path is absoluut
         run_task_with_fallback(f"Generate Long-Read ({lang_name})", task_generate_article, providers_to_run)
     

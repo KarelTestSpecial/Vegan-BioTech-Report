@@ -1,7 +1,9 @@
 ---
-title: "Reinventing Food: How Precision Fermentation is Crafting a Sustainable Protein Revolution"
 date: 2025-12-05
-featured_image: "/images/precision_fermentation.png"
+featured_image: /images/precision_fermentation.png
+language: en
+title: 'Reinventing Food: How Precision Fermentation is Crafting a Sustainable Protein
+  Revolution'
 ---
 
 # Reinventing Food: How Precision Fermentation is Crafting a Sustainable Protein Revolution

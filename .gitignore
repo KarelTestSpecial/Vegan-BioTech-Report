@@ -37,3 +37,6 @@ venv/
 .env
 .venv/
 env/
+
+# Developer
+TODO.md

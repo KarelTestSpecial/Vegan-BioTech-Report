@@ -37,13 +37,13 @@ jobs:
           FILES_INPUT: ${{ github.event.inputs.files }}
         run: |
           if [ "${{ github.event.inputs.action }}" == "archive-live-content" ]; then
-            python -m pipeline.manage_content archive
+            python3 pipeline/manage_content.py archive
           elif [ "${{ github.event.inputs.action }}" == "unarchive-latest-content" ]; then
-            python -m pipeline.manage_content unarchive
+            python3 pipeline/manage_content.py unarchive
           elif [ "${{ github.event.inputs.action }}" == "set-specific-files-archived" ]; then
-            python -m pipeline.manage_content set-archived $FILES_INPUT
+            python -m pipeline.manage_content.py set-archived $FILES_INPUT
           elif [ "${{ github.event.inputs.action }}" == "set-specific-files-live" ]; then
-            python -m pipeline.manage_content set-live $FILES_INPUT
+            python3 pipeline/manage_content.py set-live $FILES_INPUT
           fi
 
       - name: Commit and push changes

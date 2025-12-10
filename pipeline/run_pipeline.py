@@ -1,5 +1,6 @@
 # pipeline/run_pipeline.py
 
+import time
 import json
 import os
 import subprocess
@@ -150,11 +151,17 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
     eprint("\n--- Stap 1: Fetch Data ---")
     run_task_with_fallback("Fetch Data", lambda p: run_command(["python3", "-m", "pipeline.fetch", "--date", target_date_iso, "-o", raw_json_path], env=build_script_env(p, None)), providers_to_run)
 
+    eprint("💤 Even 10 seconden pauze voor de API quota...")
+    time.sleep(10)
+
     eprint("\n--- Stap 2: Curate Data ---")
     run_command(["python3", "-m", "pipeline.curate", "-i", raw_json_path, "-o", curated_json_path], env=os.environ.copy())
 
     eprint("\n--- Stap 3: Draft Newsletters ---")
     run_task_with_fallback("Draft Newsletters", lambda p: run_command(["python3", "-m", "pipeline.draft", "--date", target_date_iso, "-i", curated_json_path], env=build_script_env(p, newsletter_content_dir)), providers_to_run)
+
+    eprint("💤 Even 30 seconden pauze na het zware schrijfwerk...")
+    time.sleep(30)
 
     # Stap 4: Genereer de Engelse outline (draait nu altijd)
     eprint("\n--- Stap 4: Generate Long-Read Outline ---")
@@ -193,6 +200,9 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
             eprint(f"⚠️ Kon de onderwerpgeschiedenis niet bijwerken: {e}")
 
     run_task_with_fallback("Generate Long-Read Outline", task_select_and_generate_outline, providers_to_run)
+
+    eprint("💤 Even 10 seconden pauze...")
+    time.sleep(10)
 
 
     # Stap 5: Genereer de longread voor elke actieve taal

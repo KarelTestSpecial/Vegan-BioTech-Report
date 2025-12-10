@@ -1,4 +1,4 @@
-name: 5. [DEBUG] Run Pipeline Only
+name: 2. [MANUAL] Run Pipeline Only
 
 on:
   workflow_dispatch:

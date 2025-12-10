@@ -1,4 +1,4 @@
-name: 2. [MANUAL] Deploy Site Only
+name: 4. [MANUAL] Deploy Site Only Only
 
 on:
   push:

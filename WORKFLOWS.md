@@ -46,6 +46,8 @@ Hier is een overzicht van de automatische processen (Workflows) in dit project e
 **Opties:**
 *   `archive-live-content`: Haalt alles van de voorpagina af.
 *   `unarchive-latest-content`: Zet de laatste batch weer terug.
+*   `set-specific-files-archived`: Archiveer specifieke bestanden. Vul bij het veld **Files** de paden in (bijv. `content/longreads/voorbeeld.md`), gescheiden door een spatie.
+*   `set-specific-files-live`: Zet specifieke bestanden weer live. Vul bij het veld **Files** de paden in.
 
 ---
 

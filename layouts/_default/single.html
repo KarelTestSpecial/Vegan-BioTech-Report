@@ -10,13 +10,13 @@
     <header class="mt4 w-100">
       {{/* Top Navigation Arrows - NEW POSITION AND STYLE */}}
       <div class="flex justify-between items-center mb4">
-        {{ with .PrevInSection }}
-          <a class="f1 link dim mid-gray" href="{{ .RelPermalink }}" title="Previous: {{ .Title }}">&laquo;</a>
+        {{ with .NextInSection }}
+          <a class="f1 link dim mid-gray" href="{{ .RelPermalink }}" title="Next: {{ .Title }}">&laquo;</a>
         {{ else }}
           <div></div> {{/* Empty div to keep flex layout */}}
         {{ end }}
-        {{ with .NextInSection }}
-          <a class="f1 link dim mid-gray" href="{{ .RelPermalink }}" title="Next: {{ .Title }}">&raquo;</a>
+        {{ with .PrevInSection }}
+          <a class="f1 link dim mid-gray" href="{{ .RelPermalink }}" title="Previous: {{ .Title }}">&raquo;</a>
         {{ else }}
           <div></div> {{/* Empty div to keep flex layout */}}
         {{ end }}
@@ -69,12 +69,12 @@
 
       <div class="mt6 flex justify-between items-center">
         <div class="w-50 tl pr2">
-        {{ with .PrevInSection }}
+        {{ with .NextInSection }}
           <a class="f6 link dim mid-gray" href="{{ .RelPermalink }}">&laquo; {{ .Title }}</a>
         {{ end }}
         </div>
         <div class="w-50 tr pl2">
-        {{ with .NextInSection }}
+        {{ with .PrevInSection }}
           <a class="f6 link dim mid-gray" href="{{ .RelPermalink }}">{{ .Title }} &raquo;</a>
         {{ end }}
         </div>

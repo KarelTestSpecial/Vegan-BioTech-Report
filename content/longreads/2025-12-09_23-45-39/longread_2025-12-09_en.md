@@ -1,6 +1,6 @@
 ---
 date: 2025-12-09
-featured_image: /images/longread_2025-12-09_en.png
+featured_image: /images/labo.png
 language: en
 title: 'Cultivating Change: How Aleph Farms'' EU Approval Seeds a Global Food Revolution'
 ---

@@ -1,6 +1,6 @@
 ---
 date: 2025-12-09
-featured_image: /images/longread_2025-12-09_nl.png
+featured_image: /images/air_protein.png
 language: nl
 title: 'De Kweekvleesrevolutie: Aleph Farms'' EU-Goedkeuring Luidt Een Nieuw Tijdperk
   In Voor Duurzame Voeding'

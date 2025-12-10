@@ -4,14 +4,10 @@
       {{- .Content -}}
     </section>
     <section class="flex-ns mt5 flex-wrap justify-around">
-      {{ $pages := .Paginator.Pages }}
-      {{ $sortedPages := sort $pages "Params.archived" "asc" }}
-      {{ range $sortedPages }}
+      {{ $livePages := where .Paginator.Pages "Params.archived" "ne" true }}
+      {{ range $livePages }}
         <div class="w-100 w-30-l mb4 relative bg-white">
           <div class="bg-white mb3 pa4 gray overflow-hidden">
-            {{ if .Params.archived }}
-              <span class="f7 b db tracked-tight ttu">[ARCHIVED]</span>
-            {{ end }}
             {{ with .CurrentSection.Title }}<span class="f6 db">{{ . }}</span>{{ end }}
             <h1 class="f3 near-black">
               <a href="{{ .RelPermalink }}" class="link black dim">

@@ -1,22 +1,22 @@
 [
   {
-    "id": "openrouter-gemini-lite",
-    "api_type": "openai_compatible",
-    "model_id": "google/gemini-2.0-flash-lite-preview-02-05:free",
-    "api_key_name": "OPENROUTER_API_KEY",
-    "base_url": "https://openrouter.ai/api/v1"
-  },
-  {
-    "id": "openrouter-deepseek",
-    "api_type": "openai_compatible",
-    "model_id": "deepseek/deepseek-r1-distill-llama-70b:free",
-    "api_key_name": "OPENROUTER_API_KEY",
-    "base_url": "https://openrouter.ai/api/v1"
-  },
-  {
     "id": "openrouter-llama-3.3",
     "api_type": "openai_compatible",
     "model_id": "meta-llama/llama-3.3-70b-instruct:free",
+    "api_key_name": "OPENROUTER_API_KEY",
+    "base_url": "https://openrouter.ai/api/v1"
+  },
+  {
+    "id": "openrouter-gemini-exp",
+    "api_type": "openai_compatible",
+    "model_id": "google/gemini-2.0-flash-exp:free",
+    "api_key_name": "OPENROUTER_API_KEY",
+    "base_url": "https://openrouter.ai/api/v1"
+  },
+  {
+    "id": "openrouter-mistral-nemo",
+    "api_type": "openai_compatible",
+    "model_id": "mistralai/mistral-nemo:free",
     "api_key_name": "OPENROUTER_API_KEY",
     "base_url": "https://openrouter.ai/api/v1"
   },

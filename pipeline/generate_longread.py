@@ -95,13 +95,87 @@ def generate_longread_article(outline_path: str, output_path: str, lang_name: st
         content = content[heading_pos:]
     cleaned_markdown = content
 
-    # Voeg de <!--more--> tag toe voor de eerste H2 heading
-    h2_pattern = re.compile(r'^\s*## ', re.MULTILINE)
-    match = h2_pattern.search(cleaned_markdown)
-    if match:
-        insertion_point = match.start()
-        cleaned_markdown = cleaned_markdown[:insertion_point] + '<!--more-->\n\n' + cleaned_markdown[insertion_point:]
-        eprint("✓ <!--more--> tag succesvol ingevoegd.")
+    def _fallback_insert_more(markdown_content: str, reason: str) -> str:
+        """Inserts the <!--more--> tag before the first H2 heading as a fallback."""
+        h2_pattern = re.compile(r'^\s*## ', re.MULTILINE)
+        match = h2_pattern.search(markdown_content)
+        if match:
+            insertion_point = match.start()
+            result = markdown_content[:insertion_point] + '<!--more-->\n\n' + markdown_content[insertion_point:]
+            eprint(f"✓ <!--more--> tag ingevoegd (fallback-logica: {reason}).")
+            return result
+        return markdown_content
+
+    # Logic to insert the <!--more--> tag based on the first paragraph
+    lines = cleaned_markdown.split('\n')
+    title_line_index = -1
+    for i, line in enumerate(lines):
+        if line.strip().startswith('# '):
+            title_line_index = i
+            break
+
+    if title_line_index == -1:
+        cleaned_markdown = _fallback_insert_more(cleaned_markdown, "geen H1 gevonden")
+    else:
+        # Find the first paragraph after the title
+        first_paragraph_start_index = -1
+        for i in range(title_line_index + 1, len(lines)):
+            if lines[i].strip():
+                first_paragraph_start_index = i
+                break
+
+        if first_paragraph_start_index != -1:
+            first_paragraph_end_index = -1
+            for i in range(first_paragraph_start_index, len(lines)):
+                if not lines[i].strip():
+                    first_paragraph_end_index = i
+                    break
+            if first_paragraph_end_index == -1:
+                first_paragraph_end_index = len(lines)
+
+            paragraph_lines = lines[first_paragraph_start_index:first_paragraph_end_index]
+            paragraph_text = "\n".join(paragraph_lines)
+            words_in_paragraph = paragraph_text.split()
+
+            if len(words_in_paragraph) > 100:
+                word_count = 0
+                inserted = False
+                for i in range(len(paragraph_lines)):
+                    line_words = paragraph_lines[i].split()
+                    if not inserted and word_count + len(line_words) >= 100:
+
+                        word_index_in_line = 100 - word_count
+
+                        before_tag_words = line_words[:word_index_in_line]
+                        after_tag_words = line_words[word_index_in_line:]
+
+                        # Reconstruct the line with the tag, handling potential empty strings
+                        parts = []
+                        if before_tag_words:
+                            parts.append(' '.join(before_tag_words))
+
+                        parts.append('<!--more-->')
+
+                        if after_tag_words:
+                            parts.append(' '.join(after_tag_words))
+
+                        paragraph_lines[i] = ' '.join(parts)
+
+                        inserted = True
+                        eprint("✓ <!--more--> tag ingevoegd in de eerste paragraaf (na 100 woorden), met behoud van opmaak.")
+                        break
+
+                    word_count += len(line_words)
+
+                lines[first_paragraph_start_index:first_paragraph_end_index] = paragraph_lines
+
+            else:
+                lines.insert(first_paragraph_end_index, '<!--more-->')
+                eprint("✓ <!--more--> tag ingevoegd na de eerste paragraaf.")
+
+            cleaned_markdown = "\n".join(lines)
+        else:
+            cleaned_markdown = _fallback_insert_more(cleaned_markdown, "geen paragraaf gevonden")
     
     # Pak de titel uit de opgeschoonde content
     lines = cleaned_markdown.splitlines()

@@ -1,7 +1,9 @@
 ---
-title: "Microben en schimmels als sleutel tot een duurzame toekomst: innovaties die industrieën revolutioneren"
 date: 2025-12-12
+featured_image: /images/longread_2025-12-12_nl.png
 language: nl
+title: 'Microben en schimmels als sleutel tot een duurzame toekomst: innovaties die
+  industrieën revolutioneren'
 ---
 
 # Microben en schimmels als sleutel tot een duurzame toekomst: innovaties die industrieën revolutioneren

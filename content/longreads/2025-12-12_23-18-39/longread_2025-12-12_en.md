@@ -1,6 +1,7 @@
 ---
 title: "Harnessing the Power of Microbes and Fungi: A Revolution in Sustainable Technologies"
 date: 2025-12-12
+featured_image: /images/longread_2025-12-12_nl.png
 language: en
 ---
 

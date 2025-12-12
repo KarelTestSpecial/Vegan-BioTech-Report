@@ -44,27 +44,36 @@ def generate_image_prompt(article_text):
 
 def create_image_pollinations(prompt, filename):
     """
-    Gebruikt Pollinations.ai (Flux model) - Geen API key nodig.
+    Gebruikt Pollinations.ai met een incrementele backoff-strategie.
     """
     print(f"🎨 Pollinations generating: {filename}...")
     
     safe_prompt = quote(prompt)
     url = f"https://image.pollinations.ai/prompt/{safe_prompt}?model=flux&width=1280&height=720&nologo=true"
     
-    try:
-        response = requests.get(url, timeout=30)
-        if response.status_code == 200:
-            path = os.path.join(STATIC_IMG_DIR, filename)
-            with open(path, 'wb') as f:
-                f.write(response.content)
-            print(f"✅ Saved to {path}")
-            return path
-        else:
-            print(f"❌ Pollinations Error: {response.status_code}")
-            return None
-    except Exception as e:
-        print(f"❌ Download Error: {e}")
-        return None
+    timeouts = [45, 90, 135]
+    for i, timeout in enumerate(timeouts):
+        attempt = i + 1
+        print(f"    - Attempt {attempt}/{len(timeouts)} with timeout {timeout}s...")
+        try:
+            response = requests.get(url, timeout=timeout)
+            if response.status_code == 200:
+                path = os.path.join(STATIC_IMG_DIR, filename)
+                with open(path, 'wb') as f:
+                    f.write(response.content)
+                print(f"✅ Saved to {path}")
+                return path
+            else:
+                print(f"    - Pollinations Error (Attempt {attempt}): {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            print(f"    - Download Error (Attempt {attempt}): {e}")
+
+        if attempt < len(timeouts):
+            print("    - Waiting 15s before next attempt...")
+            time.sleep(15)
+
+    print(f"❌ Failed to download image for {filename} after {len(timeouts)} attempts.")
+    return None
 
 def process_files():
     print("🚀 Starting Image Generation Pipeline...")

@@ -20,8 +20,11 @@ nav a,
     text-shadow: 2px 1px 1px rgba(0, 0, 0, 1);
 }
 
-/* Force 100% white text in header for elements with white-90 or white-80 Tachyons classes */
-.cover .white-90,
-.cover .white-80 {
+/* Force 100% white text for specific elements in the header, excluding the main page title div */
+.cover h1, /* The h1 title on the homepage */
+.cover h2, /* The h2 description on the homepage */
+.cover nav a, /* Navigation links within the cover */
+.cover #current-lang-label, /* Language selector label */
+.cover #lang-dropdown-toggle { /* The button wrapping the language selector label */
     color: white !important;
 }

@@ -22,7 +22,7 @@ Hier is een overzicht van de automatische processen (Workflows) in dit project e
 ---
 
 ## 2. [MANUAL] Run Pipeline Only
-**Bestandsnaam:** `2-run-pipeline-only.yml`
+**Bestandsnaam:** `2-generate-only.yml`
 
 ✅ **GEBRUIK DIT VOOR:**
 *   **Testen & Reviewen.**
@@ -37,7 +37,7 @@ Hier is een overzicht van de automatische processen (Workflows) in dit project e
 ---
 
 ## 3. [MANUAL] Fill Missing Images Only
-**Bestandsnaam:** `3-fill-missing-images-only.yml`
+**Bestandsnaam:** `3-images-only.yml`
 
 ✅ **GEBRUIK DIT VOOR:**
 *   Als je een artikel hebt (handmatig of automatisch) dat nog geen coverafbeelding heeft.
@@ -52,7 +52,7 @@ Hier is een overzicht van de automatische processen (Workflows) in dit project e
 ---
 
 ## 4. [MANUAL] Deploy Site Only
-**Bestandsnaam:** `4-deploy-site-only.yml`
+**Bestandsnaam:** `4-build-and-deploy-no-content-generation.yml`
 
 ✅ **GEBRUIK DIT VOOR:**
 *   Als je **handmatig** wijzigingen hebt gedaan in de code of tekst (bijvoorbeeld een typfout verbeterd in een `.md` bestand via de GitHub editor).

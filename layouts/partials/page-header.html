@@ -1,11 +1,14 @@
 {{ $featured_image := partials.Include "func/GetFeaturedImage.html" . }}
-{{ if $featured_image }}
+  {{ if $featured_image }}
+    {{ $min_height := "666px" }}
+    {{ if eq .Section "longreads" }}
+      {{ $min_height = "444px" }}
+    {{ end }}
   {{/* Trimming the slash and adding absURL make sure the image works no matter where our site lives */}}
   {{ $featured_image_class := .Params.featured_image_class | compare.Default "cover bg-center" }}
   {{ $cover_dimming_class := .Params.cover_dimming_class | compare.Default "bg-black-60" }}
-  <header class="{{ $featured_image_class }}" style="background-image: url('{{ $featured_image }}'); min-height: 666px;">
-    <div class="{{ $cover_dimming_class }}" style="min-height: 666px;">
-      {{ partials.Include "site-navigation.html" . }}
+  <header class="{{ $featured_image_class }}" style="background-image: url('{{ $featured_image }}'); min-height: {{ $min_height }};">
+    <div class="{{ $cover_dimming_class }}" style="min-height: {{ $min_height }};">      {{ partials.Include "site-navigation.html" . }}
       <div class="tc-l pv6 ph3 ph4-ns">
         {{ if not .Params.omit_header_text }}
           <div class="f2 f1-l fw2 white-90 mb0 lh-title">{{ .Title | compare.Default .Site.Title }}</div>

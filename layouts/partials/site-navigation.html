@@ -2,47 +2,37 @@
   <div class="flex-l center items-center justify-between">
     <a href="{{ .Site.Home.RelPermalink }}" class="f3 fw2 hover-white white-90 dib no-underline">
       {{ with .Site.Params.site_logo }}
-      <img src="{{ urls.RelURL . }}" class="w100 mw5-ns" alt="{{ $.Site.Title }}" />
+        <img src="{{ urls.RelURL . }}" class="w100 mw5-ns" alt="{{ $.Site.Title }}" />
       {{ else }}
-      {{ .Site.Title }}
+        {{ .Site.Title }}
       {{ end }}
     </a>
     <div class="flex-l items-center">
-
+        
       {{/* Language Selector: Custom Dropdown */}}
-      <div id="lang-dropdown-container" class="relative mr3" {{ if not .IsHome }}style="visibility: hidden" {{ end }}>
-        <button id="lang-dropdown-toggle"
-          class="bn bg-transparent white-90 pointer f6 ttu tracked flex items-center focus-outline">
+      <div id="lang-dropdown-container" class="relative mr3" {{ if not .IsHome }}style="visibility: hidden"{{ end }}>
+        <button id="lang-dropdown-toggle" class="bn bg-transparent white-90 pointer f6 ttu tracked flex items-center focus-outline">
           <span id="current-lang-label">All Languages</span>
-          <svg class="w1 h1 ml1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clip-rule="evenodd"></path>
-          </svg>
+          <svg class="w1 h1 ml1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
-        <div id="lang-dropdown-menu" class="absolute right-0 top-2 mt2 black-80 shadow-4 br2 dn w4"
-          style="z-index: 100; background-color: rgba(255, 255, 255, 0.59); backdrop-filter: blur(5px);">
-          <a href="#" class="lang-opt db pa2 link hover-bg-light-gray black-80 f6" data-value="all"
-            style="text-shadow: none;">All Languages</a>
-          <a href="#" class="lang-opt db pa2 link hover-bg-light-gray black-80 f6" data-value="en"
-            style="text-shadow: none;">English</a>
-          <a href="#" class="lang-opt db pa2 link hover-bg-light-gray black-80 f6" data-value="nl"
-            style="text-shadow: none;">Nederlands</a>
+        <div id="lang-dropdown-menu" class="absolute right-0 top-2 mt2 black-80 shadow-4 br2 dn w4" style="z-index: 100; background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px);">
+          <a href="#" class="lang-opt db pa2 link hover-bg-light-gray black-80 f6" data-value="all" style="text-shadow: none;">All Languages</a>
+          <a href="#" class="lang-opt db pa2 link hover-bg-light-gray black-80 f6" data-value="en" style="text-shadow: none;">English</a>
+          <a href="#" class="lang-opt db pa2 link hover-bg-light-gray black-80 f6" data-value="nl" style="text-shadow: none;">Nederlands</a>
         </div>
       </div>
-
+        
       {{ partials.Include "i18nlist.html" . }}
       {{ if .Site.Menus.main }}
-      <ul class="{{ compare.Conditional (compare.Eq $.Site.Language.LanguageDirection " rtl") "pr0 ml3" "pl0 mr3" }}">
-        {{ range .Site.Menus.main }}
-        <li class="list f5 f4-ns fw4 dib {{ compare.Conditional (compare.Eq $.Site.Language.LanguageDirection "
-          rtl") "pl3" "pr3" }}">
-          <a class="hover-white white-90 no-underline" href="{{ .URL }}" title="{{ lang.Translate " pageTitle" . }}">
-            {{ .Name }}
-          </a>
-        </li>
-        {{ end }}
-      </ul>
+        <ul class="{{ compare.Conditional (compare.Eq $.Site.Language.LanguageDirection "rtl") "pr0 ml3" "pl0 mr3" }}">
+          {{ range .Site.Menus.main }}
+          <li class="list f5 f4-ns fw4 dib {{ compare.Conditional (compare.Eq $.Site.Language.LanguageDirection "rtl") "pl3" "pr3" }}">
+            <a class="hover-white white-90 no-underline" href="{{ .URL }}" title="{{ lang.Translate "pageTitle" . }}">
+              {{ .Name }}
+            </a>
+          </li>
+          {{ end }}
+        </ul>
       {{ end }}
       {{ partials.IncludeCached "social/follow.html" . }}
 

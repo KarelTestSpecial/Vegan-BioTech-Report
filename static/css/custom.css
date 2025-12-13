@@ -17,7 +17,8 @@
 .cover .lh-title,
 nav,
 nav a,
-#current-lang-label {
+#current-lang-label,
+header .lh-title {
     text-shadow: 2px 1px 1px rgba(0, 0, 0, 1);
 }
 

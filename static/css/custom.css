@@ -28,6 +28,7 @@ header .lh-title {
 .cover h2, /* The h2 description on the homepage */
 .cover nav a, /* Navigation links within the cover */
 .cover #current-lang-label, /* Language selector label */
-.cover #lang-dropdown-toggle { /* The button wrapping the language selector label */
+.cover #lang-dropdown-toggle, /* The button wrapping the language selector label */
+.cover .white-80 { /* The description div for newsletter articles */
     color: white !important;
 }

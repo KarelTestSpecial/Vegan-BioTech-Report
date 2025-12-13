@@ -32,3 +32,8 @@ header .lh-title {
 .cover .white-80 { /* The description div for newsletter articles */
     color: white !important;
 }
+
+/* Zorg ervoor dat de items in de taal-dropdown zwart zijn */
+#lang-dropdown-menu .lang-opt {
+    color: black !important;
+}

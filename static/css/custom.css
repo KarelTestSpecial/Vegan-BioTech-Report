@@ -6,7 +6,8 @@
 
 .bg-black-60,
 .bg-black-50,
-.bg-black-40 {
+.bg-black-40,
+.bg-black {
     background-color: rgba(94, 255, 188, 0.1) !important;
 }
 

@@ -1,7 +1,9 @@
 ---
-title: "Duurzame Mode Revolutie: Hoe Mycelium-Gebaseerde Biomaterialen de Toekomst van de Mode-industrie Vormgeven"
 date: 2026-01-01
+featured_image: /images/longread_2026-01-01_nl.png
 language: nl
+title: 'Duurzame Mode Revolutie: Hoe Mycelium-Gebaseerde Biomaterialen de Toekomst
+  van de Mode-industrie Vormgeven'
 ---
 
 # Duurzame Mode Revolutie: Hoe Mycelium-Gebaseerde Biomaterialen de Toekomst van de Mode-industrie Vormgeven

@@ -1,7 +1,8 @@
 ---
-title: "Sustainable Style Revolution: How Fungi Are Transforming the Fashion Industry"
 date: 2026-01-01
+featured_image: /images/longread_2026-01-01_en.png
 language: en
+title: 'Sustainable Style Revolution: How Fungi Are Transforming the Fashion Industry'
 ---
 
 # Sustainable Style Revolution: How Fungi Are Transforming the Fashion Industry

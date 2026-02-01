@@ -1,7 +1,9 @@
 ---
-title: "De Toekomst van Voedselproductie: Hoe Precisie-Fermentatie de Voedselindustrie Verandert"
 date: 2026-02-01
+featured_image: /images/longread_2026-02-01_nl.png
 language: nl
+title: 'De Toekomst van Voedselproductie: Hoe Precisie-Fermentatie de Voedselindustrie
+  Verandert'
 ---
 
 # De Toekomst van Voedselproductie: Hoe Precisie-Fermentatie de Voedselindustrie Verandert

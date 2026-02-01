@@ -1,7 +1,9 @@
 ---
-title: "Fermenting a Sustainable Future: How Precision Technology is Revolutionizing the Food Industry"
 date: 2026-02-01
+featured_image: /images/longread_2026-02-01_en.png
 language: en
+title: 'Fermenting a Sustainable Future: How Precision Technology is Revolutionizing
+  the Food Industry'
 ---
 
 # Fermenting a Sustainable Future: How Precision Technology is Revolutionizing the Food Industry

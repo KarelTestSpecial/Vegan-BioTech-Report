@@ -15,7 +15,7 @@ Welkom bij de handleiding voor het beheren van de Vegan BioTech Report website. 
 
 De workflow is ontworpen om je volledige controle te geven. Elke maand doorloop je de volgende stappen:
 
-1.  **Content Genereren:** Je start handmatig een proces dat een nieuwe set content (nieuwsbrieven en een longread) voor je aanmaakt. Deze nieuwe content staat onmiddellijk "live" op de website.
+1.  **Content Genereren:** Je start handmatig een proces dat een nieuwe set content (nieuwsbrieven en een longread) voor je aanmaakt. Het systeem kijkt automatisch naar de laatste 5-6 edities om te voorkomen dat hetzelfde onderwerp opnieuw wordt gekozen.
 2.  **Content Beheren:** Alle vorige content blijft ook "live" staan. Je kunt nu handmatig, via een interface in GitHub, beslissen welke artikelen je wilt archiveren en welke je live wilt houden.
 3.  **Verrijken & Publiceren:** Je kunt de artikelen verrijken met afbeeldingen. Alle wijzigingen worden automatisch gepubliceerd.
 
@@ -24,23 +24,23 @@ De workflow is ontworpen om je volledige controle te geven. Elke maand doorloop 
 Het genereren van nieuwe content is een **handmatige actie**. Je hebt zelf de controle over wanneer dit gebeurt.
 
 1.  Ga naar de GitHub repository en klik op het tabblad **"Actions"**.
-2.  Aan de linkerkant zie je een lijst met workflows. Klik op **"3. Run Content Pipeline"**.
+2.  Aan de linkerkant zie je een lijst met workflows. Klik op **"1-auto-generate-and-deploy"**.
 3.  Klik op de "Run workflow" knop aan de rechterkant. Het proces zal nu op de achtergrond de nieuwste content voor je genereren. Dit kan enkele minuten duren.
 
-Wanneer dit proces is voltooid, is de nieuwe content aangemaakt en staat deze automatisch "live" (bovenaan de homepage). **Belangrijk:** Oudere content wordt niet automatisch gearchiveerd.
+Wanneer dit proces is voltooid, is de nieuwe content aangemaakt en staat deze automatisch "live" (bovenaan de homepage).
 
-*(Voor de toekomst: deze actie kan worden geautomatiseerd om bijvoorbeeld elke eerste van de maand te draaien. Dit is momenteel uitgeschakeld om je volledige controle te geven.)*
+**Intelligente Topic Selectie:** Het systeem scant automatisch de titels van de reeds bestaande longreads in de map `content/longreads/`. Hierdoor zal de AI bij het genereren van een nieuwe editie automatisch onderwerpen vermijden die onlangs al aan bod zijn gekomen, wat zorgt voor een gevarieerd aanbod op de website.
 
 ## 3. Stap 2: Content Beheren (Archiveren en Live Zetten)
 
-Nadat je nieuwe content hebt gegenereerd, wil je misschien oudere artikelen van de homepage halen door ze te archiveren. Dit beheer je volledig via een interface in GitHub.
+Nadat je nieuwe content hebt gegenereerd, wilt u misschien oudere artikelen van de homepage halen door ze te archiveren. Dit beheer je volledig via een interface in GitHub.
 
 De workflow bestaat uit 3 simpele stappen: **Kijken, Kopiëren, en Aanpassen**.
 
 ### Stap A: Kijken - De status van alle content bekijken
 
 1.  Ga naar het **"Actions"** tabblad in GitHub.
-2.  Klik aan de linkerkant op de workflow **"1. Show Content Status"**.
+2.  Klik aan de linkerkant op de workflow **"6-view-content-status"**.
 3.  Klik op de "Run workflow" knop.
 4.  Klik op de voltooide run om het logboek te openen. Je ziet nu een volledige lijst van alle content, met de status `[LIVE]` of `[ARCHIVED]` en het volledige pad naar het bestand.
 
@@ -55,7 +55,7 @@ De workflow bestaat uit 3 simpele stappen: **Kijken, Kopiëren, en Aanpassen**.
 ### Stap C: Aanpassen - De status van de geselecteerde bestanden wijzigen
 
 1.  Ga terug naar het **"Actions"** tabblad.
-2.  Klik nu op de workflow **"2. Manage Content Status"**.
+2.  Klik nu op de workflow **"5-manage-content-status"**.
 3.  Klik op "Run workflow". Er verschijnt nu een formulier.
 4.  **Action:** Kies uit de dropdown wat je wilt doen.
     - `set-specific-files-archived`: Archiveer de geselecteerde bestanden.
@@ -75,6 +75,4 @@ De gegenereerde artikelen bevatten geen afbeeldingen. Je kunt deze eenvoudig han
 
 ## 5. De Website Publiceren: Hoe het Werkt
 
-De website wordt gehost via GitHub Pages. Er is een workflow genaamd **"Deploy Hugo Site to Pages"** die dit automatisch voor je doet.
-
-Deze workflow start automatisch telkens wanneer er een wijziging wordt opgeslagen in de `main` branch. Aangezien zowel de content-pijplijn als de management-acties hun wijzigingen automatisch opslaan, hoef je **geen aparte publicatiestap** te ondernemen. De site wordt altijd vanzelf bijgewerkt.
+De website wordt gehost via GitHub Pages. Er is een workflow genaamd **"4-build-and-deploy-no-content-generation"** die de site bouwt zonder nieuwe content aan te maken, maar meestal gebeurt dit automatisch na elke wijziging in de `main` branch.

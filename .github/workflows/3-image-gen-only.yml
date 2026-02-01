@@ -1,4 +1,4 @@
-name: 3. [MANUAL] Images Only
+name: 3. [MANUAL] Image Gen Only
 
 on:
   workflow_dispatch:

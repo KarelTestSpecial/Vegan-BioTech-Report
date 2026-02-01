@@ -23,7 +23,7 @@ Dit document beschrijft de verschillende geautomatiseerde workflows die worden g
 
 ## 3. Fill Missing Images
 
--   **Workflow-bestand:** `3-images-only.yml`
+-   **Workflow-bestand:** `3-image-gen-only.yml`
 -   **Doel:** Scant de content mappen op artikelen die nog geen afbeelding hebben en genereert deze alsnog.
 
 ---

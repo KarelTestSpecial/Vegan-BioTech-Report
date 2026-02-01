@@ -1,10 +1,27 @@
 # src/select_topic.py
 import os, glob, argparse, sys, json
-import google.generativeai as genai
+from google import genai
 from openai import OpenAI
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
+
+def get_ai_response(client, model_id, prompt, api_type):
+    """Genereert content en haalt op een robuuste manier de tekst op (Gemini 3.0 ready)."""
+    if api_type == 'google':
+        response = client.models.generate_content(model=model_id, contents=prompt)
+        if hasattr(response, 'candidates') and response.candidates:
+            parts = response.candidates[0].content.parts
+            text_part = next((p.text for p in parts if p.text), None)
+            if text_part:
+                return text_part
+        return response.text
+    else:
+        # OpenAI compatible client
+        response = client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
+        if response.choices and len(response.choices) > 0:
+            return response.choices[0].message.content
+        return ""
 
 def select_best_topic(news_context: str, previous_topics: list) -> str:
     API_TYPE = os.getenv('AI_API_TYPE')
@@ -12,27 +29,13 @@ def select_best_topic(news_context: str, previous_topics: list) -> str:
     API_KEY = os.getenv('AI_API_KEY')
     BASE_URL = os.getenv('AI_BASE_URL')
     
-    model = None
+    client = None
     eprint(f"Provider type: {API_TYPE}, Model: {MODEL_ID}")
 
     if API_TYPE == 'google':
-        genai.configure(api_key=API_KEY)
-        model = genai.GenerativeModel(MODEL_ID)
+        client = genai.Client(api_key=API_KEY)
     elif API_TYPE == 'openai_compatible':
         client = OpenAI(base_url=BASE_URL, api_key=API_KEY)
-        class OpenRouterModel:
-            def generate_content(self, prompt):
-                response = client.chat.completions.create(model=MODEL_ID, messages=[{"role": "user", "content": prompt}])
-                content = ""
-                if response.choices and len(response.choices) > 0:
-                    choice = response.choices[0]
-                    if choice.message and choice.message.content:
-                        content = choice.message.content
-                
-                class ResponseWrapper:
-                    def __init__(self, text): self.text = text
-                return ResponseWrapper(content)
-        model = OpenRouterModel()
     else:
         raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}.")
 
@@ -55,9 +58,8 @@ def select_best_topic(news_context: str, previous_topics: list) -> str:
     """
     
     eprint(f"🤖 Model '{MODEL_ID}' wordt aangeroepen om onderwerp te selecteren...")
-    response = model.generate_content(prompt)
-    selected_topic = response.text.strip().strip('"')
-    return selected_topic
+    selected_topic = get_ai_response(client, MODEL_ID, prompt, API_TYPE)
+    return selected_topic.strip().strip('"')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Selecteert het beste long-read onderwerp uit een lijst met gecureerd nieuws.")

@@ -3,15 +3,15 @@ import os
 import sys
 import json
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import genai
 from openai import OpenAI
 
 def eprint(*args, **kwargs):
     """Helper functie om naar stderr te printen."""
     print(*args, file=sys.stderr, **kwargs)
 
-def get_ai_model():
-    """Initialiseert en retourneert het geconfigureerde AI-model."""
+def get_ai_client_info():
+    """Geeft de geconfigureerde AI-client informatie terug."""
     API_TYPE = os.getenv('AI_API_TYPE')
     MODEL_ID = os.getenv('AI_MODEL_ID')
     API_KEY = os.getenv('AI_API_KEY')
@@ -19,34 +19,41 @@ def get_ai_model():
 
     if not all([API_TYPE, MODEL_ID, API_KEY]):
         eprint("⚠️ WAARSCHUWING: AI-configuratievariabelen niet volledig ingesteld voor flair-selectie.")
-        return None
+        return None, None, None
 
     try:
         if API_TYPE == 'google':
-            genai.configure(api_key=API_KEY)
-            return genai.GenerativeModel(MODEL_ID)
+            return genai.Client(api_key=API_KEY), MODEL_ID, API_TYPE
         elif API_TYPE == 'openai_compatible':
-            client = OpenAI(base_url=BASE_URL, api_key=API_KEY)
-            class OpenRouterModel:
-                def generate_content(self, prompt):
-                    response = client.chat.completions.create(model=MODEL_ID, messages=[{"role": "user", "content": prompt}])
-                    content = ""
-                    if response.choices and response.choices[0].message:
-                        content = response.choices[0].message.content
-                    class ResponseWrapper:
-                        def __init__(self, text): self.text = text
-                    return ResponseWrapper(content)
-            return OpenRouterModel()
+            return OpenAI(base_url=BASE_URL, api_key=API_KEY), MODEL_ID, API_TYPE
         else:
             eprint(f"⚠️ WAARSCHUWING: Ongeldig AI_API_TYPE '{API_TYPE}' voor flair-selectie.")
-            return None
+            return None, None, None
     except Exception as e:
-        eprint(f"⚠️ WAARSCHUWING: Kon AI-model voor flair-selectie niet initialiseren. Fout: {e}")
-        return None
+        eprint(f"⚠️ WAARSCHUWING: Kon AI-client voor flair-selectie niet initialiseren. Fout: {e}")
+        return None, None, None
 
-def select_best_flair_with_ai(title: str, available_flairs: list, model) -> str or None:
+def get_ai_response(client, model_id, prompt, api_type):
+    """Genereert content en haalt op een robuuste manier de tekst op (Gemini 3.0 ready)."""
+    if api_type == 'google':
+        response = client.models.generate_content(model=model_id, contents=prompt)
+        if hasattr(response, 'candidates') and response.candidates:
+            parts = response.candidates[0].content.parts
+            text_part = next((p.text for p in parts if p.text), None)
+            if text_part:
+                return text_part
+        return response.text
+    else:
+        # OpenAI compatible client
+        response = client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
+        if response.choices and len(response.choices) > 0:
+            return response.choices[0].message.content
+        return ""
+
+def select_best_flair_with_ai(title: str, available_flairs: list, client_info) -> str or None:
     """Gebruikt AI om de beste flair te selecteren uit een lijst."""
-    if not model or not available_flairs:
+    client, model_id, api_type = client_info
+    if not client or not available_flairs:
         return None
 
     flair_texts = [f"'{flair['text']}'" for flair in available_flairs]
@@ -67,8 +74,7 @@ def select_best_flair_with_ai(title: str, available_flairs: list, model) -> str 
 
     eprint(f"🤖 AI wordt aangeroepen om de beste flair te kiezen uit: {flair_list_str}")
     try:
-        response = model.generate_content(prompt)
-        chosen_flair_text = response.text.strip().strip("'\"")
+        chosen_flair_text = get_ai_response(client, model_id, prompt, api_type).strip().strip("'\"")
 
         for flair in available_flairs:
             if flair['text'] == chosen_flair_text:
@@ -106,7 +112,7 @@ def post_to_mastodon(post_content):
     except Exception as e:
         eprint(f"❌ FOUT: Een onverwachte fout is opgetreden bij Mastodon: {e}")
 
-def post_to_reddit(post_content, ai_model):
+def post_to_reddit(post_content, ai_client_info):
     """Publiceert een post op Reddit, inclusief dynamische flair-selectie."""
     reddit_details = post_content.get('reddit_details')
     if not reddit_details:
@@ -152,7 +158,7 @@ def post_to_reddit(post_content, ai_model):
         try:
             available_flairs = list(subreddit.flair.link_templates)
             if available_flairs:
-                flair_id = select_best_flair_with_ai(title, available_flairs, ai_model)
+                flair_id = select_best_flair_with_ai(title, available_flairs, ai_client_info)
             else:
                 eprint("INFO: Subreddit heeft geen configureerbare flairs.")
         except Exception as e:
@@ -196,8 +202,8 @@ if __name__ == "__main__":
         eprint(f"❌ FOUT: Kan 'social_posts.json' niet lezen of parsen. Fout: {e}")
         sys.exit(1)
 
-    # Initialiseer het AI-model eenmalig voor eventueel gebruik
-    ai_model_for_flairs = get_ai_model()
+    # Initialiseer de AI-client informatie eenmalig
+    ai_client_info = get_ai_client_info()
 
     for post in posts_to_publish:
         platform = post.get("platform")

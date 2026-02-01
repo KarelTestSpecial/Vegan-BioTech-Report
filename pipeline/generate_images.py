@@ -1,7 +1,7 @@
 import os
 import time
 import frontmatter
-import google.generativeai as genai
+from google import genai
 import requests
 from urllib.parse import quote
 
@@ -10,9 +10,20 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 CONTENT_DIR = "content" # Zoekt in alle submappen (newsletters, longreads, etc.)
 STATIC_IMG_DIR = "static/images"
 
-# Installeer Google
+def get_ai_response(client, model_id, prompt):
+    """Genereert content en haalt op een robuuste manier de tekst op (Gemini 3.0 ready)."""
+    response = client.models.generate_content(model=model_id, contents=prompt)
+    if hasattr(response, 'candidates') and response.candidates:
+        parts = response.candidates[0].content.parts
+        text_part = next((p.text for p in parts if p.text), None)
+        if text_part:
+            return text_part
+    return response.text
+
+# Installeer Google Client
+model_client = None
 if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
+    model_client = genai.Client(api_key=GEMINI_API_KEY)
 
 # Zorg dat de map bestaat
 os.makedirs(STATIC_IMG_DIR, exist_ok=True)
@@ -21,10 +32,11 @@ def generate_image_prompt(article_text):
     """
     Vraagt Gemini (tekst) om een prompt te schrijven.
     """
-    if not GEMINI_API_KEY:
+    if not model_client:
         return "Futuristic biotechnology laboratory, cinematic lighting, 8k"
 
-    model = genai.GenerativeModel('gemini-2.5-flash')
+    # We gebruiken een modern flash model voor snelheid
+    model_id = 'gemini-2.0-flash'
     
     prompt = f"""
     You are an AI art director. Read this summary and write ONE single, descriptive English prompt 
@@ -36,8 +48,7 @@ def generate_image_prompt(article_text):
     Return ONLY the prompt.
     """
     try:
-        response = model.generate_content(prompt)
-        return response.text.strip()
+        return get_ai_response(model_client, model_id, prompt).strip()
     except Exception as e:
         print(f"⚠️ Text Gen Error: {e}")
         return "Bright, optimistic futuristic biotechnology laboratory with vibrant green plants and clean, innovative technology, cinematic lighting, 8k, photorealistic"

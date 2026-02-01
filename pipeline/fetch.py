@@ -6,7 +6,7 @@ import time
 import re
 import sys
 import argparse
-import google.generativeai as genai
+from google import genai
 from openai import OpenAI
 
 def eprint(*args, **kwargs):
@@ -23,19 +23,17 @@ PROMPT_FILE = "prompts/step1.txt"
 OUTPUT_FILE = "raw.json"
 MAX_RETRIES = 3
 
-model = None
+model_client = None
 eprint(f"Provider type: {API_TYPE}, Model: {MODEL_ID}")
 
 if API_TYPE == 'google':
-    genai.configure(api_key=API_KEY)
-    model = genai.GenerativeModel(MODEL_ID)
+    model_client = genai.Client(api_key=API_KEY)
 elif API_TYPE == 'openai_compatible':
     client = OpenAI(base_url=BASE_URL, api_key=API_KEY)
     class OpenRouterModel:
-        def generate_content(self, prompt):
-            response = client.chat.completions.create(model=MODEL_ID, messages=[{"role": "user", "content": prompt}])
+        def generate_content(self, model_id, prompt):
+            response = client.chat.completions.create(model=model_id, messages=[{"role": "user", "content": prompt}])
             content = ""
-            # FIX: 'choices' is een lijst. Pak het eerste element.
             if response.choices and len(response.choices) > 0:
                 choice = response.choices[0]
                 if choice.message and choice.message.content:
@@ -44,9 +42,23 @@ elif API_TYPE == 'openai_compatible':
             class ResponseWrapper:
                 def __init__(self, text): self.text = text
             return ResponseWrapper(content)
-    model = OpenRouterModel()
+    model_client = OpenRouterModel()
 else:
     raise ValueError(f"Ongeldig AI_API_TYPE: {API_TYPE}")
+
+def get_ai_response(client, model_id, prompt):
+    """Genereert content en haalt op een robuuste manier de tekst op (Gemini 3.0 ready)."""
+    if API_TYPE == 'google':
+        response = client.models.generate_content(model=model_id, contents=prompt)
+        # Zoek naar het tekst-onderdeel (overslaat thought-onderdelen)
+        if hasattr(response, 'candidates') and response.candidates:
+            parts = response.candidates[0].content.parts
+            text_part = next((p.text for p in parts if p.text), None)
+            if text_part:
+                return text_part
+        return response.text
+    else:
+        return client.generate_content(model_id, prompt).text
 
 # --- Argumenten Parser ---
 parser = argparse.ArgumentParser(description="Verzamel nieuws voor een specifieke datum en sla het op als JSON.")
@@ -76,8 +88,7 @@ eprint(f"🤖 Model '{MODEL_ID}' wordt aangeroepen...")
 raw_content = ""
 for attempt in range(MAX_RETRIES):
     try:
-        response = model.generate_content(prompt)
-        raw_content = response.text
+        raw_content = get_ai_response(model_client, MODEL_ID, prompt)
         
         json_match = re.search(r'\[.*\]', raw_content, re.DOTALL)
         if json_match:

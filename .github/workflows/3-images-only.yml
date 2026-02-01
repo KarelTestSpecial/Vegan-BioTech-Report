@@ -33,6 +33,7 @@ jobs:
           git add content static/images
           if ! git diff --staged --quiet; then
             git commit -m "chore(images): Generate missing images from workflow run"
+            git pull --rebase origin main
             git push
           else
             echo "No changes to commit."

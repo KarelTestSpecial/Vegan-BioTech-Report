@@ -49,6 +49,7 @@ jobs:
           git add .
           if ! git diff --staged --quiet; then
             git commit -m "feat(content): Add generated content from workflow run"
+            git pull --rebase origin main
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
           fi
       - name: Generate Images with Gemini
@@ -62,6 +63,7 @@ jobs:
           git add .
           if ! git diff --staged --quiet; then
             git commit -m "feat(content): Add generated images from workflow run"
+            git pull --rebase origin main
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
           fi
 

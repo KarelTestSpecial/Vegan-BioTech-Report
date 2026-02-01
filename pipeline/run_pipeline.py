@@ -9,6 +9,7 @@ import datetime
 import argparse
 import shutil
 import glob
+import frontmatter
 from dotenv import load_dotenv
 load_dotenv()
 from urllib.parse import urljoin
@@ -16,6 +17,31 @@ from urllib.parse import urljoin
 def eprint(*args, **kwargs):
     """Helper functie om naar stderr te printen."""
     print(*args, file=sys.stderr, **kwargs)
+
+def get_recent_longread_topics(content_dir="content/longreads", num_editions=5):
+    """Extraheert titels van de meest recente longreads direct uit de content bestanden."""
+    topics = []
+    try:
+        # Zoek alle subdirectories in content/longreads/
+        dirs = [d for d in glob.glob(os.path.join(content_dir, "*/")) if os.path.isdir(d)]
+        # Sorteer op naam aflopend (timestamp gebaseerde namen)
+        dirs.sort(reverse=True)
+        
+        for d in dirs[:num_editions]:
+            # Zoek bij voorkeur naar de Engelse versie voor consistente onderwerp-matching
+            md_files = glob.glob(os.path.join(d, "*_en.md"))
+            if not md_files:
+                md_files = glob.glob(os.path.join(d, "*.md"))
+            
+            if md_files:
+                post = frontmatter.load(md_files[0])
+                title = post.get('title')
+                if title:
+                    topics.append(title)
+        eprint(f"ℹ️ {len(topics)} eerdere onderwerpen gevonden in {content_dir}")
+    except Exception as e:
+        eprint(f"⚠️ Waarschuwing: Kon eerdere onderwerpen niet extraheren: {e}")
+    return topics
 
 def run_command(command: list, env: dict):
     """Voert een command uit en vangt output en fouten af."""
@@ -33,7 +59,9 @@ def run_command(command: list, env: dict):
 def archive_output_files():
     """Archiveert oude output-bestanden naar een timestamped map in de archive directory."""
     output_dir = "output"
-    data_files = [os.path.join(output_dir, f) for f in ["raw.json", "curated.json", "longread_outline.json", "last_topics.json"]]
+    # We archiveren raw.json, curated.json en longread_outline.json. 
+    # last_topics.json laten we staan of regenereren we.
+    data_files = [os.path.join(output_dir, f) for f in ["raw.json", "curated.json", "longread_outline.json"]]
 
     existing_files = [f for f in data_files if os.path.exists(f)]
 
@@ -162,6 +190,12 @@ def run_full_pipeline(target_date_str: str or None, no_archive: bool):
 
     eprint("💤 Even 10 seconden pauze na het zware schrijfwerk...")
     time.sleep(10)
+
+    # Voorbereiding voor Stap 4: Haal bestaande onderwerpen op uit de content folder
+    previous_topics = get_recent_longread_topics(num_editions=6)
+    with open(topics_file, 'w', encoding='utf-8') as f:
+        json.dump(previous_topics, f, indent=2)
+    eprint(f"✅ Onderwerpgeschiedenis gesynchroniseerd met content in {topics_file}")
 
     # Stap 4: Genereer de Engelse outline (draait nu altijd)
     eprint("\n--- Stap 4: Generate Long-Read Outline ---")

@@ -1,7 +1,9 @@
 ---
-title: "Sustainable Style Revolution: How Fungi and Microbes Are Redefining the Fashion Industry"
 date: 2026-02-01
+featured_image: /images/longread_2026-02-01_en.png
 language: en
+title: 'Sustainable Style Revolution: How Fungi and Microbes Are Redefining the Fashion
+  Industry'
 ---
 
 # Sustainable Style Revolution: How Fungi and Microbes Are Redefining the Fashion Industry

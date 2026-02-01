@@ -1,7 +1,8 @@
 ---
-title: "De Toekomst van Mode: Hoe Schimmels en Microben de Lederindustrie Veranderen"
 date: 2026-02-01
+featured_image: /images/longread_2026-02-01_nl.png
 language: nl
+title: 'De Toekomst van Mode: Hoe Schimmels en Microben de Lederindustrie Veranderen'
 ---
 
 # De Toekomst van Mode: Hoe Schimmels en Microben de Lederindustrie Veranderen

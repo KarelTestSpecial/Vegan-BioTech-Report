@@ -58,6 +58,11 @@ def generate_longread_article(outline_path: str, output_path: str, lang_name: st
 
     CRITICAL: The ENTIRE article, including the title, must be written in {lang_name}.
 
+    TERMINOLOGY RULES (strictly enforced):
+    - NEVER use "schimmel", "schimmels", or compound forms like "schimmel-leer", "schimmelmateriaal". These words are FORBIDDEN.
+    - ALWAYS use "mycelium" and its compound forms instead (e.g., "mycelium-leer", "myceliummateriaal").
+    - In English, avoid "mold-based" or "mold leather" — use "mycelium-based" or "mycelium leather".
+
     English Outline:
     - Article Title: {title}
     - Introduction Hook: {introduction_hook}

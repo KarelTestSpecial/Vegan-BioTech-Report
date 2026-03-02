@@ -8,9 +8,8 @@ Word for "Edition": {edition_word}
 Edition Date: {edition_date}
 
 ### TERMINOLOGY RULES ###
-- NEVER use the word "schimmel", "schimmels", or any compound form (e.g., "schimmel-leer", "schimmelmateriaal", "schimmelzwam"). These are FORBIDDEN words.
-- ALWAYS use "mycelium" and its compound forms instead (e.g., "mycelium-leer", "myceliummateriaal", "myceliumzwam").
-- In English, avoid "mold-based" or "mold leather" — use "mycelium-based" or "mycelium leather".
+- NEVER use the word "schimmel", "schimmels", or any compound form (e.g., "schimmel-leer", "schimmelmateriaal", "schimmelzwam"). These are FORBIDDEN words. ALWAYS use "mycelium" and its compound forms instead (e.g., "mycelium-leer", "myceliummateriaal", "myceliumzwam").
+- NEVER use the word "bacteriën", "bacterie", or any compound form. These are FORBIDDEN words. ALWAYS use "micro-organismen" or "micro-organisme" instead.
 
 ### INSTRUCTIONS ###
 1.  **Language:** The ENTIRE newsletter must be written in the specified {lang}.

@@ -1,7 +1,9 @@
 ---
-title: "Revolutie in Duurzame Materialen: Hoe MycoWorks' $125M Investering de Mode-industrie op Z'n Kop Zet met Mycelium-gebaseerd Leer"
 date: 2026-03-01
+featured_image: /images/longread_2026-03-01_nl.png
 language: nl
+title: 'Revolutie in Duurzame Materialen: Hoe MycoWorks'' $125M Investering de Mode-industrie
+  op Z''n Kop Zet met Mycelium-gebaseerd Leer'
 ---
 
 # Revolutie in Duurzame Materialen: Hoe MycoWorks' $125M Investering de Mode-industrie op Z'n Kop Zet met Mycelium-gebaseerd Leer

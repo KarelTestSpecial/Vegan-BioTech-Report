@@ -1,7 +1,9 @@
 ---
-title: "Fungi Fashion Revolution: How MycoWorks is Redefining the Future of Sustainable Materials"
 date: 2026-03-01
+featured_image: /images/longread_2026-03-01_en.png
 language: en
+title: 'Fungi Fashion Revolution: How MycoWorks is Redefining the Future of Sustainable
+  Materials'
 ---
 
 # Fungi Fashion Revolution: How MycoWorks is Redefining the Future of Sustainable Materials

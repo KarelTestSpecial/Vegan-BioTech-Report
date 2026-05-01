@@ -1,7 +1,8 @@
 ---
-title: "Opkomst vande Lab‑Kip: Hoe Upside Foods de Voedingsmarkt Revolutioneert"
 date: 2026-05-01
+featured_image: /images/longread_2026-05-01_nl.png
 language: nl
+title: 'Opkomst vande Lab‑Kip: Hoe Upside Foods de Voedingsmarkt Revolutioneert'
 ---
 
 # Opkomst vande Lab‑Kip: Hoe Upside Foods de Voedingsmarkt Revolutioneert

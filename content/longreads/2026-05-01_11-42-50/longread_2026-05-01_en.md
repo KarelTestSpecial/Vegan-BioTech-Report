@@ -1,7 +1,9 @@
 ---
-title: "Beyond the Cow: How Better Milk’s EU Breakthrough Redefines the Future of Dairy"
 date: 2026-05-01
+featured_image: /images/longread_2026-05-01_en.png
 language: en
+title: 'Beyond the Cow: How Better Milk’s EU Breakthrough Redefines the Future of
+  Dairy'
 ---
 
 # Beyond the Cow: How Better Milk’s EU Breakthrough Redefines the Future of Dairy

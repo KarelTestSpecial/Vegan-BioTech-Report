@@ -1,7 +1,8 @@
 ---
-title: "De Zuivelrevolutie: Hoe Better Milk de Europese markt voorgoed verandert"
 date: 2026-05-01
+featured_image: /images/longread_2026-05-01_nl.png
 language: nl
+title: 'De Zuivelrevolutie: Hoe Better Milk de Europese markt voorgoed verandert'
 ---
 
 # De Zuivelrevolutie: Hoe Better Milk de Europese markt voorgoed verandert

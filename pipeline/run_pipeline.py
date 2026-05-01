@@ -10,6 +10,7 @@ import argparse
 import shutil
 import glob
 import frontmatter
+import requests
 from dotenv import load_dotenv
 load_dotenv()
 from urllib.parse import urljoin
@@ -17,6 +18,26 @@ from urllib.parse import urljoin
 def eprint(*args, **kwargs):
     """Helper functie om naar stderr te printen."""
     print(*args, file=sys.stderr, **kwargs)
+
+def get_openrouter_free_models():
+    """Haalt de actuele lijst van gratis modellen op van OpenRouter."""
+    try:
+        api_key = os.getenv('OPENROUTER_API_KEY')
+        if not api_key:
+            eprint("⚠️ Geen OPENROUTER_API_KEY gevonden, kan geen modellen ophalen.")
+            return []
+        
+        headers = {"Authorization": f"Bearer {api_key}"}
+        response = requests.get("https://openrouter.ai/api/v1/models", headers=headers, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        
+        free_models = [m['id'] for m in data.get('data', []) if ':free' in m['id']]
+        eprint(f"ℹ️ {len(free_models)} actuele gratis OpenRouter modellen gevonden.")
+        return free_models
+    except Exception as e:
+        eprint(f"⚠️ Waarschuwing: Kon OpenRouter modellen niet ophalen: {e}")
+        return []
 
 def get_recent_longread_topics(content_dir="content/longreads", num_editions=5):
     """Extraheert titels van de meest recente longreads direct uit de content bestanden."""
@@ -81,14 +102,33 @@ def archive_output_files():
     eprint(f"Oude output-bestanden gearchiveerd in: {run_archive_dir}")
 
 def get_provider_list():
-    """Haalt de lijst van AI providers op uit providers.json."""
+    """Haalt de lijst van AI providers op uit providers.json en vult aan met actuele OpenRouter modellen."""
     try:
         with open('providers.json', 'r') as f:
             all_providers = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError) as e:
         eprint(f"❌ Kon providers.json niet laden. Fout: {e}")
-        return []
+        all_providers = []
     
+    # Haal actuele gratis modellen op
+    current_free_models = get_openrouter_free_models()
+    
+    # Injecteer actuele modellen (als ze nog niet in de lijst staan)
+    dynamic_providers = []
+    for model_id in current_free_models[:5]: # Neem de eerste 5 actuele modellen
+        # Check of dit model al in providers.json staat
+        if not any(p.get('model_id') == model_id for p in all_providers):
+            dynamic_providers.append({
+                "id": f"dynamic-{model_id.split('/')[-1]}",
+                "api_type": "openai_compatible",
+                "model_id": model_id,
+                "api_key_name": "OPENROUTER_API_KEY",
+                "base_url": "https://openrouter.ai/api/v1"
+            })
+    
+    # Zet de nieuwe modellen vooraan voor de beste kans op succes
+    all_providers = dynamic_providers + all_providers
+
     forced_provider_id = os.getenv('FORCED_PROVIDER')
     if forced_provider_id and forced_provider_id != 'auto':
         eprint(f"⚡️ Modus: Specifieke provider geforceerd: '{forced_provider_id}'")

@@ -11,6 +11,7 @@ import shutil
 import glob
 import frontmatter
 import requests
+from google import genai
 from dotenv import load_dotenv
 load_dotenv()
 from urllib.parse import urljoin
@@ -18,6 +19,27 @@ from urllib.parse import urljoin
 def eprint(*args, **kwargs):
     """Helper functie om naar stderr te printen."""
     print(*args, file=sys.stderr, **kwargs)
+
+def get_google_free_models():
+    """Haalt de actuele lijst van Google Gemini modellen op via de SDK."""
+    try:
+        api_key = os.getenv('GOOGLE_API_KEY')
+        if not api_key:
+            return []
+        
+        client = genai.Client(api_key=api_key)
+        models = client.models.list()
+        # Filter op flash modellen die niet deprecated zijn.
+        # We zoeken naar 'flash' en vermijden 'preview' en 'image' (die voor beeldgeneratie is)
+        flash_models = [m.name.replace('models/', '') for m in models if 'flash' in m.name.lower() and 'preview' not in m.name.lower() and 'image' not in m.name.lower()]
+        
+        # Sorteer om de 'hoogste' versie te krijgen (bijv. 3 > 2.5 > 2.0)
+        flash_models.sort(reverse=True)
+        eprint(f"ℹ️ {len(flash_models)} actuele Google Flash modellen gevonden.")
+        return flash_models
+    except Exception as e:
+        eprint(f"⚠️ Waarschuwing: Kon Google modellen niet live ophalen: {e}")
+        return []
 
 def get_openrouter_free_models():
     """Haalt de actuele lijst van gratis modellen op van OpenRouter."""
@@ -102,7 +124,7 @@ def archive_output_files():
     eprint(f"Oude output-bestanden gearchiveerd in: {run_archive_dir}")
 
 def get_provider_list():
-    """Haalt de lijst van AI providers op uit providers.json en vult aan met actuele OpenRouter modellen."""
+    """Haalt de lijst van AI providers op uit providers.json en vult aan met actuele modellen."""
     try:
         with open('providers.json', 'r') as f:
             all_providers = json.load(f)
@@ -110,24 +132,37 @@ def get_provider_list():
         eprint(f"❌ Kon providers.json niet laden. Fout: {e}")
         all_providers = []
     
-    # Haal actuele gratis modellen op
+    # 1. Haal actuele Google modellen op
+    current_google_models = get_google_free_models()
+    dynamic_google = []
+    for model_id in current_google_models[:2]: # Neem de top 2
+        if not any(p.get('model_id') == model_id for p in all_providers):
+            dynamic_google.append({
+                "id": f"dynamic-google-{model_id}",
+                "api_type": "google",
+                "model_id": model_id,
+                "api_key_name": "GOOGLE_API_KEY",
+                "base_url": None
+            })
+
+    # 2. Haal actuele OpenRouter gratis modellen op
     current_free_models = get_openrouter_free_models()
     
     # Injecteer actuele modellen (als ze nog niet in de lijst staan)
-    dynamic_providers = []
+    dynamic_openrouter = []
     for model_id in current_free_models[:5]: # Neem de eerste 5 actuele modellen
         # Check of dit model al in providers.json staat
         if not any(p.get('model_id') == model_id for p in all_providers):
-            dynamic_providers.append({
-                "id": f"dynamic-{model_id.split('/')[-1]}",
+            dynamic_openrouter.append({
+                "id": f"dynamic-or-{model_id.split('/')[-1]}",
                 "api_type": "openai_compatible",
                 "model_id": model_id,
                 "api_key_name": "OPENROUTER_API_KEY",
                 "base_url": "https://openrouter.ai/api/v1"
             })
     
-    # Zet de nieuwe modellen vooraan voor de beste kans op succes
-    all_providers = dynamic_providers + all_providers
+    # Zet de nieuwe modellen vooraan (eerst Google, dan OpenRouter voor stabiliteit)
+    all_providers = dynamic_google + dynamic_openrouter + all_providers
 
     forced_provider_id = os.getenv('FORCED_PROVIDER')
     if forced_provider_id and forced_provider_id != 'auto':

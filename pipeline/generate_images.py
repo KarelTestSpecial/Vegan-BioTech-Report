@@ -28,6 +28,26 @@ if GEMINI_API_KEY:
 # Zorg dat de map bestaat
 os.makedirs(STATIC_IMG_DIR, exist_ok=True)
 
+def get_latest_flash_model(client):
+    """Haalt de nieuwste beschikbare flash model naam op via de SDK."""
+    try:
+        models = client.models.list()
+        # Filter op 'flash', vermijd 'preview' en 'image' (die voor beeldgeneratie is)
+        flash_models = [m.name for m in models if 'flash' in m.name.lower() and 'preview' not in m.name.lower() and 'image' not in m.name.lower()]
+        
+        if flash_models:
+            # Sorteer om de 'hoogste' versie te krijgen (bijv. 3 > 2.5 > 2.0)
+            flash_models.sort(reverse=True)
+            latest = flash_models[0]
+            # Verwijder 'models/' prefix als die er staat
+            if latest.startswith('models/'):
+                latest = latest.replace('models/', '')
+            print(f"ℹ️ Live Gemini model geselecteerd voor afbeeldingen: {latest}")
+            return latest
+    except Exception as e:
+        print(f"⚠️ Kon Gemini modellen niet live ophalen voor afbeeldingen: {e}")
+    return 'gemini-2.5-flash' # Stabiele fallback
+
 def generate_image_prompt(article_text):
     """
     Vraagt Gemini (tekst) om een prompt te schrijven.
@@ -35,8 +55,8 @@ def generate_image_prompt(article_text):
     if not model_client:
         return "Futuristic biotechnology laboratory, cinematic lighting, 8k"
 
-    # We gebruiken een modern flash model voor snelheid
-    model_id = 'gemini-2.0-flash'
+    # We halen het nieuwste model live op
+    model_id = get_latest_flash_model(model_client)
     
     prompt = f"""
     You are an AI art director. Read this summary and write ONE single, descriptive English prompt 
@@ -110,8 +130,8 @@ def process_files():
                             with open(file_path, 'wb') as f:
                                 frontmatter.dump(post, f)
                             
-                            print("💤 Waiting 15s to respect Rate Limits...")
-                            time.sleep(15)
+                            print("💤 Waiting 30s to respect Rate Limits...")
+                            time.sleep(30)
                             
                 except Exception as e:
                     print(f"Skipping {file}: {e}")

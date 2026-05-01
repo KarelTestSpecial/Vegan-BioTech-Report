@@ -85,6 +85,11 @@ def generate_longread_article(outline_path: str, output_path: str, lang_name: st
     eprint("✓ Full Article Writer Chain has been built.")
     
     final_article_markdown = chain_full_article.invoke(article_input)
+    
+    # --- CHECK VOOR LEGE OF TE KORTE OUTPUT ---
+    if not final_article_markdown or len(final_article_markdown.strip()) < 500:
+        raise ValueError(f"❌ Fout: Gegenereerde content voor {lang_name} is te kort of leeg ({len(final_article_markdown)} tekens).")
+
     eprint(f"✓ Full article in {lang_name} generated!")
     eprint("-" * 50)
     

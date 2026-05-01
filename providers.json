@@ -23,7 +23,7 @@
   {
     "id": "google-direct-backup",
     "api_type": "google",
-    "model_id": "gemini-2.0-flash",
+    "model_id": "gemini-2.5-flash",
     "api_key_name": "GOOGLE_API_KEY",
     "base_url": null
   }

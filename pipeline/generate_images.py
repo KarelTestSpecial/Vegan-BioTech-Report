@@ -127,7 +127,7 @@ def process_files():
                             # AANGEPAST: Schrijft naar featured_image
                             post['featured_image'] = f"/images/{img_filename}"
                             
-                            with open(file_path, 'wb') as f:
+                            with open(file_path, 'w', encoding='utf-8') as f:
                                 frontmatter.dump(post, f)
                             
                             print("💤 Waiting 30s to respect Rate Limits...")

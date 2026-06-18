@@ -3,6 +3,7 @@ title = "Vegan BioTech Report"
 theme = "ananke"
 defaultContentLanguage = "en"
 summaryLength = 50
+googleAnalytics = "G-K6E3ZWPP90"
 
 [pagination]
   pagerSize = 20

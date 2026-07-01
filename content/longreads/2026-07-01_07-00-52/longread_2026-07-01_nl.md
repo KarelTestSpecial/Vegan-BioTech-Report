@@ -1,7 +1,9 @@
 ---
-title: "Van Lucht naar Maaltijd: Hoe Eiwit uit CO2 de Toekomst van onze Voedselzekerheid Bepaalt"
 date: 2026-07-01
+featured_image: /images/longread_2026-07-01_nl.png
 language: nl
+title: 'Van Lucht naar Maaltijd: Hoe Eiwit uit CO2 de Toekomst van onze Voedselzekerheid
+  Bepaalt'
 ---
 
 # Van Lucht naar Maaltijd: Hoe Eiwit uit CO2 de Toekomst van onze Voedselzekerheid Bepaalt

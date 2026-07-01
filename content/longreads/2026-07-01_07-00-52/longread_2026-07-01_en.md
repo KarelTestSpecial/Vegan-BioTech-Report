@@ -1,7 +1,9 @@
 ---
-title: "Harvesting the Atmosphere: How Carbon-Capture Proteins Are Redefining Global Nutrition"
 date: 2026-07-01
+featured_image: /images/longread_2026-07-01_en.png
 language: en
+title: 'Harvesting the Atmosphere: How Carbon-Capture Proteins Are Redefining Global
+  Nutrition'
 ---
 
 # Harvesting the Atmosphere: How Carbon-Capture Proteins Are Redefining Global Nutrition

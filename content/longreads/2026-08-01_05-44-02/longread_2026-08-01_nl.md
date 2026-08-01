@@ -1,7 +1,9 @@
 ---
-title: "Groeien naar de Toekomst: Hoe de Reishi-fabriek van MycoWorks de wereld van duurzame mode en biomaterialen herdefiniëert"
 date: 2026-08-01
+featured_image: /images/longread_2026-08-01_nl.png
 language: nl
+title: 'Groeien naar de Toekomst: Hoe de Reishi-fabriek van MycoWorks de wereld van
+  duurzame mode en biomaterialen herdefiniëert'
 ---
 
 # Groeien naar de Toekomst: Hoe de Reishi-fabriek van MycoWorks de wereld van duurzame mode en biomaterialen herdefiniëert

@@ -1,7 +1,9 @@
 ---
-title: "Growing the Future of Fashion: Inside MycoWorks’ Industrial Revolution for Luxury Biomaterials"
 date: 2026-08-01
+featured_image: /images/longread_2026-08-01_en.png
 language: en
+title: 'Growing the Future of Fashion: Inside MycoWorks’ Industrial Revolution for
+  Luxury Biomaterials'
 ---
 
 # Growing the Future of Fashion: Inside MycoWorks’ Industrial Revolution for Luxury Biomaterials

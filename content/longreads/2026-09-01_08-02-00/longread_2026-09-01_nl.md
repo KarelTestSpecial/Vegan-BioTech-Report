@@ -1,7 +1,9 @@
 ---
-title: "De Toekomst van Zuivel Vloeibaar Maken: Hoe Precisiefermentatie de Globale Voedselindustrie Hervormt"
 date: 2026-09-01
+featured_image: /images/longread_2026-09-01_nl.png
 language: nl
+title: 'De Toekomst van Zuivel Vloeibaar Maken: Hoe Precisiefermentatie de Globale
+  Voedselindustrie Hervormt'
 ---
 
 # De Toekomst van Zuivel Vloeibaar Maken: Hoe Precisiefermentatie de Globale Voedselindustrie Hervormt

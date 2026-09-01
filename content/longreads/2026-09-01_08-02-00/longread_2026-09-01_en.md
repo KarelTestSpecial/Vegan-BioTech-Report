@@ -1,7 +1,9 @@
 ---
-title: "Brewing a New Era: Inside the Financial Engine, Infrastructure Race, and Industrial Scale-Up of Precision Fermentation"
 date: 2026-09-01
+featured_image: /images/longread_2026-09-01_en.png
 language: en
+title: 'Brewing a New Era: Inside the Financial Engine, Infrastructure Race, and Industrial
+  Scale-Up of Precision Fermentation'
 ---
 
 # Brewing a New Era: Inside the Financial Engine, Infrastructure Race, and Industrial Scale-Up of Precision Fermentation
